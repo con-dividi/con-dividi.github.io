@@ -1,0 +1,33 @@
+---
+import ButtonUrl from './ButtonUrl.astro';
+export interface Props {
+	links: {
+		course_id: string;
+		group_id: string;
+		platform: string;
+		id: string;
+		year: number;
+		section: number;
+		display_name: string;
+		prefix?: string;
+	}[];
+}
+const { links } = Astro.props;
+---
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-y-3 gap-y-3 gap-x-5">
+	{
+		links.map((e) => {
+			return (
+				<ButtonUrl
+					icon_class={e.platform == 'wa' ? 'fa fa-whatsapp' : 'fa fa-telegram'}
+					name={e.display_name}
+					group_id={e.id}
+					platform={e.platform}
+					prefix={e.prefix}
+					random={e.course_id + '-' + e.year + '-' + e.section + '-' + Math.random()}
+				/>
+			);
+		})
+	}
+</div>

@@ -1,0 +1,16 @@
+---
+export interface Props {
+	name: string;
+	url: string;
+	icon_class: string;
+	classes?: string;
+}
+const { name, url, icon_class, classes } = Astro.props;
+---
+
+<a
+	class={classes == undefined
+		? 'w-full bg-white text-fucsia no-underline uppercase duration-400 transition-color text-sm tracking-[0px] border-white px-5 py-[15px] rounded-lg border-1 border-solid hover:bg-zero hover:text-white hover:border-white hover:color-white'
+		: classes}
+	href={url}><i class={icon_class + ' mr-2'} aria-hidden="true"></i>{name}</a
+>

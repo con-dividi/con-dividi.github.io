@@ -1,0 +1,47 @@
+---
+import ButtonMain from '~/components/ButtonMain.astro';
+import Default from '~/layouts/Default.astro';
+import Section from '~/components/Section.astro';
+import { Languages } from '../../utils/types';
+const content = await Astro.glob('../../../data/content/*.md');
+const calendar = await Astro.glob('../../../data/calendar/*.md');
+export async function getStaticPaths() {
+	return Languages.values().map((language: any) => {
+		return {
+			params: { lang: language },
+			props: { language },
+		};
+	});
+}
+const { language } = Astro.props;
+---
+
+<Default title="Design">
+	<header class="relative">
+		<nav class="background_gradient h-[70vh] flex flex-col w-full items-center justify-center">
+			<h1 class="mb-50px text-5xl mx-auto text-center">
+				{
+					language == 'it' ? (
+						<>
+							Centro <b>Con-Dividi</b>
+						</>
+					) : (
+						<>
+							<b>Con-Dividi</b> Center
+						</>
+					)
+				}
+			</h1>
+			<h2 class="text-white">testo a descrizione della assoc</h2>
+		</nav>
+	</header>
+
+	<main class="relative flex flex-col py-50px">
+		<Section
+			title={content[0].frontmatter[language].volunteers.title}
+			text={content[0].frontmatter[language].volunteers.text}
+		/>
+	</main>
+
+	<footer><a href="">Con-Dividi</a></footer>
+</Default>

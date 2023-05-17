@@ -1,0 +1,35 @@
+---
+import ButtonMain from '~/components/ButtonMain.astro';
+import Default from './Default.astro';
+
+export interface Props {
+	title: string;
+	url: URL;
+	redirect_page: boolean;
+}
+const { title, url, redirect_page = true } = Astro.props;
+---
+
+<Default title={title}>
+	<header class="relative">
+		<nav class="background_gradient h-screen flex flex-col w-full items-center justify-center">
+			<h1 class="mb-50px text-5xl font-bold mx-auto text-center">School of Design</h1>
+			<div class="grid grid-cols-2 gap-6">
+				<ButtonMain icon_class="fa fa-telegram" name="IT" url={redirect_page ? './it/' : '/it/'} />
+				<ButtonMain icon_class="fa fa-telegram" name="EN" url={redirect_page ? './en/' : '/en/'} />
+			</div>
+		</nav>
+	</header>
+</Default>
+
+<script type="text/javascript" define:vars={{ url, redirect_page }}>
+	if (!redirect_page) return;
+	const urlObj = new URL(url);
+	var userLang = navigator.language || navigator.userLanguage;
+	if (userLang.includes('it')) {
+		urlObj.pathname = '/it' + urlObj.pathname;
+	} else {
+		urlObj.pathname = '/en' + urlObj.pathname;
+	}
+	window.location.replace(urlObj.pathname);
+</script>

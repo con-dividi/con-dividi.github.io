@@ -1,0 +1,40 @@
+---
+export interface Props {
+	name: string;
+	group_id: string;
+	platform: string;
+	prefix?: string;
+	icon_class: string;
+	random: string;
+	classes?: string;
+}
+const { name, group_id, platform, prefix, icon_class, random, classes } = Astro.props;
+---
+
+<div
+	id={random}
+	class={classes == undefined
+		? 'cursor-pointer w-full bg-white text-fucsia no-underline uppercase duration-400 transition-color text-sm tracking-[0px] border-white rounded-lg border-1 border-solid hover:bg-zero hover:text-white hover:border-white hover:color-white'
+		: classes}
+>
+	<div class="grid grid-cols-[min-content_auto] py-15px px-5">
+		<i class={icon_class + ' ml-0 mr-1 my-auto w-14px h-14px'} aria-hidden="true"></i><p
+			class="text-center inline-block m-auto"
+		>
+			{name}
+		</p>
+	</div>
+</div>
+
+<script define:vars={{ group_id, platform, prefix, random }}>
+	let btn = document.getElementById(random);
+	let url = platform == 'wa' ? 'https://chat.whatsapp.com/' : 'https://t.me/';
+	const click = function () {
+		url += prefix != undefined ? prefix + '/' : '';
+		url += group_id;
+		window.open(url, '_blank').focus();
+	};
+	if (btn != null) {
+		btn.addEventListener('click', click);
+	}
+</script>

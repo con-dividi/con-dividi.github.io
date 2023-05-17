@@ -1,0 +1,19 @@
+---
+import ButtonUrl from './ButtonUrl.astro';
+
+export interface Props {
+	title: string;
+	text: string;
+}
+const { title, text } = Astro.props;
+---
+
+<section
+	class="mx-auto w-[90%] md:w-[80%] text-white overflow-hidden flex flex-col items-center my-[4vh] rounded-[20px] shadow_box"
+>
+	<h2 class="mt-50px font-bold mb-15px text-3xl w-9/10 md:w-full text-center">{title}</h2>
+	<div class="items-left w-[80%]">
+		<h3 class="">{text}</h3>
+	</div>
+	<slot />
+</section>
