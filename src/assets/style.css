@@ -37,17 +37,14 @@ html {
 }
 
 h1 {
-	color: var(--white);
 	font-family: 'sansbold';
 }
 
 h2 {
-	color: var(--fucsia);
 	font-family: 'sanslight';
 }
 
 h3 {
-	color: var(--fucsia);
 	font-family: 'sanslight';
 }
 

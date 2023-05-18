@@ -1,7 +1,7 @@
 import { defineConfig } from 'windicss/helpers';
 
 export default defineConfig({
-	darkMode: 'class', // or 'media' or 'class'
+	darkMode: 'media', // or 'media' or 'class'
 	corePlugins: {
 		container: false,
 	},
@@ -9,8 +9,6 @@ export default defineConfig({
 		extend: {
 			colors: {
 				fucsia: '#dc3189',
-				zero: 'rgba(0, 0, 0, 0)',
-				gray: 'rgba(0, 0, 0, 0.15)',
 			},
 			gridTemplateRows: {
 				// Simple 8 row grid
