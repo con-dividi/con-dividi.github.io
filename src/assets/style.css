@@ -48,20 +48,19 @@ h3 {
 	font-family: 'sanslight';
 }
 
+p {
+	font-family: 'sanslight';
+}
+
 b {
 	font-family: 'sansbold';
 }
-/* 
-ul {
-	display: flex;
-	flex-direction: row;
-	list-style-type: none;
+
+blockquote {
+	color: var(--fucsia);
 }
 
-li {
-	margin: 10px;
-} 
-
+/*
 a {
 	background-color: var(--white);
 	color: var(--fucsia);

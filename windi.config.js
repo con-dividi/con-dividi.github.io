@@ -1,7 +1,7 @@
 import { defineConfig } from 'windicss/helpers';
 
 export default defineConfig({
-	darkMode: 'media', // or 'media' or 'class'
+	darkMode: 'false', // or 'media' or 'class'
 	corePlugins: {
 		container: false,
 	},
@@ -17,7 +17,7 @@ export default defineConfig({
 		},
 	},
 	extract: {
-		include: ['./src/**/*.{vue,html,jsx,tsx,astro}'],
+		include: ['./src/**/*.{vue,html,jsx,tsx,astro}', './data/**/*.mdx'],
 		exclude: ['node_modules', '.git'],
 	},
 	plugins: [require('windicss/plugin/typography')],

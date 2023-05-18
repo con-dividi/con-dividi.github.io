@@ -1,0 +1,28 @@
+---
+export interface Props {
+	activities: [
+		{
+			day: string;
+			hours: string;
+			description: string;
+		}
+	];
+	note: string;
+}
+const { activities, note } = Astro.props;
+---
+
+<ul class="list-none m-0">
+	{
+		activities.map((activity, index) => (
+			<li class={`border-y border-fucsia ${index % 2 === 0 ? 'bg-gray-50' : ''}`}>
+				<h4 class="font-bold">{activity.day}</h4>
+				<p class="text-gray-600">
+					{activity.hours} - {activity.description}
+				</p>
+			</li>
+		))
+	}
+</ul>
+
+<p class="mt-4 text-red-600 font-bold">{note}</p>
