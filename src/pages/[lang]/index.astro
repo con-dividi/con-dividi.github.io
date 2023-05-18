@@ -41,8 +41,19 @@ const { language } = Astro.props;
 				}
 			</h1>
 			<h2 class="text-white">
-				Incontri, mostre, laboratori e dibattiti per diffondere e sensibilizzare tutti, sui temi dell’infanzia,
-				dell'adolescenza e della famiglia.
+				{
+					language == 'it' ? (
+						<>
+							Incontri, mostre, laboratori e dibattiti per diffondere e sensibilizzare tutti, sui temi dell'infanzia,
+							dell'adolescenza e della famiglia.
+						</>
+					) : (
+						<>
+							Meetings, exhibitions, workshops, and debates to spread awareness and educate everyone on the topics of
+							childhood, adolescence, and family.
+						</>
+					)
+				}
 			</h2>
 		</nav>
 	</header>
@@ -67,7 +78,7 @@ const { language } = Astro.props;
 
 								<ul class="list-none m-0">
 									{item.frontmatter.activities.map((activity: { day: string; hours: string; description: string }) => (
-										<li class=" border-y border-fucsia bg-gray-50">
+										<li class="!before:content-[none] pr-4 border-y border-fucsia bg-gray-50">
 											<h4 class="font-bold">{activity.day}</h4>
 											<p class="text-gray-600">
 												{activity.hours} - {activity.description}
@@ -125,38 +136,75 @@ const { language } = Astro.props;
 					<div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
 						<form action="#" class="space-y-8">
 							<div>
-								<label for="email" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
+								<label for="email" class="block mb-2 text-sm font-medium text-gray-900">
+									{language == 'it' ? 'La tua email' : 'Your email'}
+								</label>
 								<input
 									type="email"
 									id="email"
 									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-fucsia block w-full p-2.5"
-									placeholder="name@flowbite.com"
+									placeholder="name@example.com"
 									required
 								/>
 							</div>
 							<div>
-								<label for="subject" class="block mb-2 text-sm font-medium text-gray-900">Subject</label>
+								<label for="subject" class="block mb-2 text-sm font-medium text-gray-900">
+									{language == 'it' ? 'Oggetto' : 'Subject'}
+								</label>
 								<input
 									type="text"
 									id="subject"
 									class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:border-fucsia"
-									placeholder="Let us know how we can help you"
+									placeholder={language == 'it'
+										? 'Facci sapere come possiamo aiutarti'
+										: 'Let us know how we can help you'}
 									required
 								/>
 							</div>
 							<div class="sm:col-span-2">
-								<label for="message" class="block mb-2 text-sm font-medium text-gray-900">Your message</label>
+								<label for="message" class="block mb-2 text-sm font-medium text-gray-900">
+									{language == 'it' ? 'Il tuo messaggio' : 'Your message'}
+								</label>
 								<textarea
 									id="message"
 									rows="6"
 									class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:border-fucsia"
-									placeholder="Leave a comment..."></textarea>
+									placeholder={language == 'it' ? 'Lascia un commento...' : 'Leave a comment...'}></textarea>
 							</div>
+							<div>
+								<label for="file-upload" class="block mb-2 text-sm font-medium text-gray-900">
+									{language == 'it' ? 'Carica un file (fino a 20MB)' : 'Upload a file (up to 20MB)'}
+								</label>
+								<input
+									type="file"
+									id="file-upload"
+									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-fucsia block w-full p-2.5"
+									required
+								/>
+								<!-- onChange={(event: { target: { files: any[]; value: string } }) => {
+									const file = event.target.files[0];
+									if (file.size > 20000000) {
+										// file size in bytes (20MB)
+										alert(
+											language == 'it'
+												? 'Il file è troppo grande, per favore carica un file di dimensioni inferiori a 20MB.'
+												: 'File is too large, please upload a file less than 20MB.'
+										);
+										event.target.value = '';
+									}
+								}} -->
+							</div>
+
 							<button
 								type="submit"
-								class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:border-fucsia"
-								>Send message</button
+								class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800"
 							>
+								<span
+									class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
+								>
+									{language == 'it' ? 'Invia messaggio' : 'Send Message'}
+								</span>
+							</button>
 						</form>
 					</div>
 				</section>
