@@ -10,6 +10,8 @@ const proposte = await Astro.glob('../../../data/content/proposte.*');
 const affitto = await Astro.glob('../../../data/content/affitto.*');
 const sostienici = await Astro.glob('../../../data/content/sostienici.*');
 // const calendar = await Astro.glob('../../../data/calendar/*.md');
+
+let languageSwitch = Languages.languageSwitchPages(Astro.url);
 export async function getStaticPaths() {
 	return Languages.values().map((language: any) => {
 		return {
@@ -21,7 +23,7 @@ export async function getStaticPaths() {
 const { language } = Astro.props;
 ---
 
-<Default>
+<Default title="homepage">
 	<header class="relative">
 		<nav
 			class="background_gradient pt-20px md:pt-0 md:h-100 h-[70%] flex flex-col w-full items-center justify-center text-white"
@@ -212,5 +214,22 @@ const { language } = Astro.props;
 		</Section>
 	</main>
 
-	<footer><a href="">Con-Dividi</a></footer>
+	<footer class="relative grid grid-col-1 grid-row-2">
+		<div class="m-auto">
+			<h1>Con-Dividi</h1>
+		</div>
+		<div class="items-center justify-center flex">
+			{
+				language === 'it' ? (
+					<a href={languageSwitch[Languages.toNum(Languages.EN)]}>
+						<div>Switch to English</div>
+					</a>
+				) : (
+					<a href={languageSwitch[Languages.toNum(Languages.IT)]}>
+						<div>Passa ad Italiano</div>
+					</a>
+				)
+			}
+		</div>
+	</footer>
 </Default>
