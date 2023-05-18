@@ -40,7 +40,10 @@ const { language } = Astro.props;
 					)
 				}
 			</h1>
-			<h2 class="text-white">testo a descrizione della assoc</h2>
+			<h2 class="text-white">
+				Incontri, mostre, laboratori e dibattiti per diffondere e sensibilizzare tutti, sui temi dell’infanzia,
+				dell'adolescenza e della famiglia.
+			</h2>
 		</nav>
 	</header>
 
@@ -60,7 +63,7 @@ const { language } = Astro.props;
 					item.frontmatter.lang === language ? (
 						<div class="flex">
 							<div class="prose mt-4 m-auto">
-								<h3>Giornate apertura al pubblico:</h3>
+								<h3>{language === 'it' ? 'Giornate apertura al pubblico:' : 'Public opening days'}</h3>
 
 								<ul class="list-none m-0">
 									{item.frontmatter.activities.map((activity: { day: string; hours: string; description: string }) => (
