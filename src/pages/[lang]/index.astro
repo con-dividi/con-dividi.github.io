@@ -83,7 +83,7 @@ const { language } = Astro.props;
 										<li class="!before:content-[none] pr-4 border-y border-fucsia bg-gray-50">
 											<h4 class="font-bold">{activity.day}</h4>
 											<p class="text-gray-600">
-												{activity.hours} - {activity.description}
+												{activity.hours != '' ? <> {activity.hours} - </> : ''} {activity.description}
 											</p>
 										</li>
 									))}
@@ -107,7 +107,7 @@ const { language } = Astro.props;
 		<Section title="Contattaci">
 			<div>
 				<div>
-					<div class="bg-gray-50 p-6 rounded-lg border border-1 border-fucsia text-center">
+					<div class="bg-gray-50 py-6 rounded-lg border border-1 border-fucsia text-center">
 						<div class="mb-4">
 							<span class="font-semibold">{language === 'it' ? 'Telefono' : 'Phone'}:</span>
 							<a href="tel:0762976640" class="text-fucsia hover:underline">0762976640</a>
