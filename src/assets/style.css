@@ -44,6 +44,14 @@ h2 {
 	font-family: 'sanslight';
 }
 
+li {
+	font-family: 'sanslight';
+}
+
+ul {
+	list-style: disc;
+}
+
 h3 {
 	font-family: 'sanslight';
 }
