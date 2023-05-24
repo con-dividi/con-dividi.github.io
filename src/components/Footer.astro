@@ -1,0 +1,29 @@
+---
+import { Languages } from '~/utils/types';
+
+export interface Props {
+	language: Languages;
+}
+const { language } = Astro.props;
+
+let languageSwitch = Languages.languageSwitchPages(Astro.url);
+---
+
+<footer class="relative grid grid-col-1 grid-row-2">
+	<div class="m-auto">
+		<h1>Con-Dividi</h1>
+	</div>
+	<div class="items-center justify-center flex">
+		{
+			language === 'it' ? (
+				<a href={languageSwitch[Languages.toNum(Languages.EN)]}>
+					<div>Switch to English</div>
+				</a>
+			) : (
+				<a href={languageSwitch[Languages.toNum(Languages.IT)]}>
+					<div>Passa ad Italiano</div>
+				</a>
+			)
+		}
+	</div>
+</footer>

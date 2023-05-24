@@ -1,4 +1,5 @@
 import { defineConfig } from 'windicss/helpers';
+/** @type {import('tailwindcss').Config} */
 
 export default defineConfig({
 	darkMode: 'false', // or 'media' or 'class'
@@ -20,5 +21,14 @@ export default defineConfig({
 		include: ['./src/**/*.{vue,html,jsx,tsx,astro}', './data/**/*.mdx'],
 		exclude: ['node_modules', '.git'],
 	},
-	plugins: [require('windicss/plugin/typography')],
+	plugins: [
+		require('windicss/plugin/typography'),
+		function ({ addBase }) {
+			addBase({
+				ul: { listStyleType: 'disc' },
+			});
+		},
+		require('flowbite/plugin'),
+	],
+	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}', './node_modules/flowbite/**/*.js'],
 });

@@ -3,6 +3,8 @@ import Default from '~/layouts/Default.astro';
 import Section from '~/components/Section.astro';
 import { Languages } from '../../utils/types';
 import main_logo from '../../assets/img/main_logo.svg';
+import Navbar from '~/components/Navbar.astro';
+import Footer from '~/components/Footer.astro';
 const chi_siamo = await Astro.glob('../../../data/content/chi_siamo.*');
 const missione = await Astro.glob('../../../data/content/missione.*');
 const diventa_volontario = await Astro.glob('../../../data/content/diventa_volontario.*');
@@ -11,7 +13,6 @@ const affitto = await Astro.glob('../../../data/content/affitto.*');
 const sostienici = await Astro.glob('../../../data/content/sostienici.*');
 // const calendar = await Astro.glob('../../../data/calendar/*.md');
 
-let languageSwitch = Languages.languageSwitchPages(Astro.url);
 export async function getStaticPaths() {
 	return Languages.values().map((language: any) => {
 		return {
@@ -25,8 +26,9 @@ const { language } = Astro.props;
 
 <Default title="homepage">
 	<header class="relative">
-		<nav
-			class="background_gradient pt-20px md:pt-0 md:h-100 h-[70%] flex flex-col w-full items-center justify-center text-white"
+		<Navbar current={0} language={language} />
+		<div
+			class="background_gradient md:pt-0 md:h-100 h-[70%] flex flex-col w-full items-center justify-center text-white pt-25"
 		>
 			<img src={main_logo} alt="" width="100px" height="100px" class="mb-20px" />
 			<h1 class="mb-50px text-5xl mx-auto text-center">
@@ -57,7 +59,7 @@ const { language } = Astro.props;
 					)
 				}
 			</h2>
-		</nav>
+		</div>
 	</header>
 
 	<main class="relative flex flex-col py-50px">
@@ -134,7 +136,7 @@ const { language } = Astro.props;
 						</div>
 					</div>
 				</div>
-				<section class="bg-white">
+				<!-- <section class="bg-white">
 					<div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
 						<form action="#" class="space-y-8">
 							<div>
@@ -183,18 +185,6 @@ const { language } = Astro.props;
 									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-fucsia block w-full p-2.5"
 									required
 								/>
-								<!-- onChange={(event: { target: { files: any[]; value: string } }) => {
-									const file = event.target.files[0];
-									if (file.size > 20000000) {
-										// file size in bytes (20MB)
-										alert(
-											language == 'it'
-												? 'Il file è troppo grande, per favore carica un file di dimensioni inferiori a 20MB.'
-												: 'File is too large, please upload a file less than 20MB.'
-										);
-										event.target.value = '';
-									}
-								}} -->
 							</div>
 
 							<button
@@ -209,27 +199,11 @@ const { language } = Astro.props;
 							</button>
 						</form>
 					</div>
-				</section>
+				</section> -->
 			</div>
 		</Section>
 	</main>
-
-	<footer class="relative grid grid-col-1 grid-row-2">
-		<div class="m-auto">
-			<h1>Con-Dividi</h1>
-		</div>
-		<div class="items-center justify-center flex">
-			{
-				language === 'it' ? (
-					<a href={languageSwitch[Languages.toNum(Languages.EN)]}>
-						<div>Switch to English</div>
-					</a>
-				) : (
-					<a href={languageSwitch[Languages.toNum(Languages.IT)]}>
-						<div>Passa ad Italiano</div>
-					</a>
-				)
-			}
-		</div>
-	</footer>
+	<Footer language={language} />
 </Default>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>

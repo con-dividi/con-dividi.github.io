@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
 	font-family: sansregular;
 	src: url('/font/OpenSans-Regular.ttf');
@@ -40,16 +44,24 @@ h1 {
 	font-family: 'sansbold';
 }
 
+.sansbold {
+	font-family: 'sansbold';
+}
+
+.sanslight {
+	font-family: 'sanslight';
+}
+
+.sansregular {
+	font-family: 'sansregular';
+}
+
 h2 {
 	font-family: 'sanslight';
 }
 
 li {
 	font-family: 'sanslight';
-}
-
-ul {
-	list-style: disc;
 }
 
 h3 {
