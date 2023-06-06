@@ -28,7 +28,7 @@
     "@typescript-eslint/parser": "^5.47.1",
     "astro": "^2.4.5",
     "astro-icon": "^0.8.0",
-    "eslint": "^8.30.0",
+    "eslint": "^8.42.0",
     "eslint-plugin-astro": "^0.21.1",
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "flowbite": "^1.6.5",
