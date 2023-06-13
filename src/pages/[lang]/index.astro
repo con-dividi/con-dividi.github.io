@@ -5,6 +5,7 @@ import { Languages } from '../../utils/types';
 import main_logo from '../../assets/img/main_logo.svg';
 import Navbar from '~/components/Navbar.astro';
 import Footer from '~/components/Footer.astro';
+import Carousel from '~/components/Carousel.astro';
 const chi_siamo = await Astro.glob('../../../data/content/chi_siamo.*');
 const missione = await Astro.glob('../../../data/content/missione.*');
 const diventa_volontario = await Astro.glob('../../../data/content/diventa_volontario.*');
@@ -12,6 +13,8 @@ const proposte = await Astro.glob('../../../data/content/proposte.*');
 const affitto = await Astro.glob('../../../data/content/affitto.*');
 const sostienici = await Astro.glob('../../../data/content/sostienici.*');
 // const calendar = await Astro.glob('../../../data/calendar/*.md');
+
+const images = await Astro.glob('../../assets/img/carousel/*.top.jpg');
 
 export async function getStaticPaths() {
 	return Languages.values().map((language: any) => {
@@ -70,7 +73,18 @@ const { language } = Astro.props;
 			{missione.map((item) => (item.frontmatter.lang === language ? <item.Content /> : ''))}
 		</Section>
 		<Section title={diventa_volontario.filter((e) => e.frontmatter.lang === language)[0].frontmatter.title}>
-			{diventa_volontario.map((item) => (item.frontmatter.lang === language ? <item.Content /> : ''))}
+			{
+				diventa_volontario.map((item) =>
+					item.frontmatter.lang === language ? (
+						<>
+							<item.Content />
+							<Carousel images={images} />
+						</>
+					) : (
+						''
+					)
+				)
+			}
 		</Section>
 		<Section title={proposte.filter((e) => e.frontmatter.lang === language)[0].frontmatter.title}>
 			{

@@ -1,0 +1,21 @@
+---
+export interface Props {
+	index: number;
+}
+const { index } = Astro.props;
+---
+
+<div
+	id={'modal_' + index}
+	tabindex="-1"
+	class="_modal fixed top-0 left-0 right-0 z-50 hidden w-full p-0 overflow-x-hidden overflow-y-auto md:inset-0 max-h-screen h-screen w-screen max-w-screen bg-gray-500"
+>
+	<div class="h-full relative w-full max-w-7xl max-h-full bg-gray-100 rounded">
+		<button onclick={'triggerDialog(' + index + ')'} class="absolute z-10 right-5 top-5"
+			><i class="fa fa-times" aria-hidden="true"></i>
+		</button>
+		<div class="h-full relative bg-white rounded-lg shadow dark:bg-gray-700 rounded">
+			<slot />
+		</div>
+	</div>
+</div>

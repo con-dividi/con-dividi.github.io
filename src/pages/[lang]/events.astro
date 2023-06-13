@@ -2,6 +2,7 @@
 import Default from '~/layouts/Default.astro';
 import { Languages } from '../../utils/types';
 import main_logo from '../../assets/img/main_logo.svg';
+console.log(JSON.stringify(main_logo));
 import Navbar from '~/components/Navbar.astro';
 import Footer from '~/components/Footer.astro';
 const calendar = await Astro.glob('../../../data/calendar/*.mdx');
@@ -23,7 +24,7 @@ const { language } = Astro.props;
 		<div
 			class="background_gradient md:pt-0 md:h-100 h-[70%] flex flex-col w-full items-center justify-center text-white pt-25"
 		>
-			<img src={main_logo} alt="" width="100px" height="100px" class="mb-20px" />
+			<img src={main_logo} alt="" class="mb-20px w-100px h-100px" />
 			<h1 class="mb-50px text-5xl mx-auto text-center">
 				{
 					language == 'it' ? (
