@@ -1,10 +1,12 @@
 ---
+import sharp from 'sharp';
 import Modal from './Modal.astro';
 
 export interface Props {
 	images: Record<string, any>[];
 }
 const { images } = Astro.props;
+
 ---
 
 <div id="custom-controls-gallerys" class="relative w-full py-50px" data-carousel="slide">

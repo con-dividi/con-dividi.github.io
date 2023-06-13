@@ -4,10 +4,8 @@ import { Languages } from '../../utils/types';
 import main_logo from '../../assets/img/main_logo.svg';
 import Navbar from '~/components/Navbar.astro';
 import Footer from '~/components/Footer.astro';
-import Carousel from '~/components/Carousel.astro';
 import Modal from '~/components/Modal.astro';
-const images = await Astro.glob('../../assets/img/carousel/*.jpg');
-
+const images = await Astro.glob('../../assets/opt_img/carousel/*.jpg');
 export async function getStaticPaths() {
 	return Languages.values().map((language: any) => {
 		return {

@@ -14,7 +14,7 @@ const affitto = await Astro.glob('../../../data/content/affitto.*');
 const sostienici = await Astro.glob('../../../data/content/sostienici.*');
 // const calendar = await Astro.glob('../../../data/calendar/*.md');
 
-const images = await Astro.glob('../../assets/img/carousel/*.top.jpg');
+const images = await Astro.glob('../../assets/opt_img/carousel/*.top.jpg');
 
 export async function getStaticPaths() {
 	return Languages.values().map((language: any) => {
