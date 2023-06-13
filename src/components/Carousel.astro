@@ -6,7 +6,6 @@ export interface Props {
 	images: Record<string, any>[];
 }
 const { images } = Astro.props;
-
 ---
 
 <div id="custom-controls-gallerys" class="relative w-full py-50px" data-carousel="slide">
@@ -23,61 +22,61 @@ const { images } = Astro.props;
 								onclick={'triggerDialog(' + i + ')'}
 							/>
 						</div>
-						<div class="hidden md:block">
-							<Modal index={i}>
-								<div class="grid md:grid-cols-[1fr_3fr_1fr] md:grid-rows-1 grid-cols-2 grid-rows-[3fr_1fr]">
-									<button
-										type="button"
-										class="md:col-start-1 md:col-span-1 row-start-2 md:row-start-1 row-span-1 h-fit m-auto md:ml-auto md:mr-10 my-auto flex cursor-pointer group focus:outline-none"
-										onclick={'prevImage(' + i + ')'}
-									>
-										<span class="text-gray-400 hover:text-gray-900 dark:hover:text-white group-focus:text-gray-900 dark:group-focus:text-white">
-											<svg
-												aria-hidden="true"
-												class="w-6 h-6"
-												fill="currentColor"
-												viewBox="0 0 20 20"
-												xmlns="http://www.w3.org/2000/svg"
-											>
-												<path
-													fill-rule="evenodd"
-													d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
-													clip-rule="evenodd"
-												/>
-											</svg>
-											<span class="sr-only">Previous</span>
-										</span>
-									</button>
+						<Modal index={i}>
+							<div class="grid md:grid-cols-[1fr_3fr_1fr] md:grid-rows-1 grid-cols-2 grid-rows-[3fr_1fr]">
+								<button
+									type="button"
+									class="md:col-start-1 md:col-span-1 row-start-2 md:row-start-1 row-span-1 h-fit m-auto md:ml-auto md:mr-10 my-auto flex cursor-pointer group focus:outline-none"
+									onclick={'prevImage(' + i + ')'}
+								>
+									<span class="text-gray-400 hover:text-gray-900 dark:hover:text-white group-focus:text-gray-900 dark:group-focus:text-white">
+										<svg
+											aria-hidden="true"
+											class="w-6 h-6"
+											fill="currentColor"
+											viewBox="0 0 20 20"
+											xmlns="http://www.w3.org/2000/svg"
+										>
+											<path
+												fill-rule="evenodd"
+												d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
+												clip-rule="evenodd"
+											/>
+										</svg>
+										<span class="sr-only">Previous</span>
+									</span>
+								</button>
+								<div class="h-[50vh] md:h-auto">
 									<img
 										src={e.default}
 										alt=""
-										class="md:col-start-2 col-span-1 col-start-1 block max-w-screen md:max-h-screen min-h-[50vw] md:h-auto w-auto m-auto p-10"
+										class="max-w-[100vw] md:max-w-[80vw] md:col-start-2 col-span-1 col-start-1 block max-w-screen md:max-h-screen min-h-[50vw] md:h-auto w-auto m-auto md:p-10 pt-20 md:pt-10"
 									/>
-									<button
-										type="button"
-										class="md:col-start-3 md:col-span-1 col-start-2 row-start-2 md:row-start-1 row-span-1 h-fit m-auto md:ml-auto md:mr-10 my-auto flex cursor-pointer group focus:outline-none"
-										onclick={'nextImage(' + i + ')'}
-									>
-										<span class="h-fit text-gray-400 hover:text-gray-900 dark:hover:text-white group-focus:text-gray-900 dark:group-focus:text-white">
-											<svg
-												aria-hidden="true"
-												class="w-6 h-6"
-												fill="currentColor"
-												viewBox="0 0 20 20"
-												xmlns="http://www.w3.org/2000/svg"
-											>
-												<path
-													fill-rule="evenodd"
-													d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-													clip-rule="evenodd"
-												/>
-											</svg>
-											<span class="sr-only">Next</span>
-										</span>
-									</button>
 								</div>
-							</Modal>
-						</div>
+								<button
+									type="button"
+									class="md:col-start-3 md:col-span-1 col-start-2 row-start-2 md:row-start-1 row-span-1 h-fit m-auto md:ml-auto md:mr-10 my-auto flex cursor-pointer group focus:outline-none"
+									onclick={'nextImage(' + i + ')'}
+								>
+									<span class="h-fit text-gray-400 hover:text-gray-900 dark:hover:text-white group-focus:text-gray-900 dark:group-focus:text-white">
+										<svg
+											aria-hidden="true"
+											class="w-6 h-6"
+											fill="currentColor"
+											viewBox="0 0 20 20"
+											xmlns="http://www.w3.org/2000/svg"
+										>
+											<path
+												fill-rule="evenodd"
+												d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+												clip-rule="evenodd"
+											/>
+										</svg>
+										<span class="sr-only">Next</span>
+									</span>
+								</button>
+							</div>
+						</Modal>
 					</>
 				);
 			})
@@ -138,7 +137,6 @@ const { images } = Astro.props;
 		document.getElementById('modal_' + i)?.classList.toggle('hidden');
 	}
 
-	console.log(length);
 	function nextImage(i) {
 		let e = i + 1;
 		let next = document.getElementById('modal_' + e);

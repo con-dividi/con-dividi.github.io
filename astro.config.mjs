@@ -19,7 +19,7 @@ const DEFAULT_OPTIONS = {
 	png: {
 		// https://sharp.pixelplumbing.com/api-output#png
 		quality: 100,
-		compressionLevel: 9
+		compressionLevel: 9,
 	},
 	jpeg: {
 		// https://sharp.pixelplumbing.com/api-output#jpeg
