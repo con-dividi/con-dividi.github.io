@@ -14,7 +14,7 @@ const { index } = Astro.props;
 		<button onclick={'triggerDialog(' + index + ')'} class="absolute z-10 right-5 top-5"
 			><i class="fa fa-times" aria-hidden="true"></i>
 		</button>
-		<div class="h-screen md:h-auto relative bg-white rounded-lg shadow dark:bg-gray-700 rounded">
+		<div class="h-full overflow-hidden relative bg-white rounded-lg shadow dark:bg-gray-700 rounded">
 			<slot />
 		</div>
 	</div>
