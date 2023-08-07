@@ -61,7 +61,7 @@
   },
   "dependencies": {
     "@astrojs/image": "^0.17.0",
-    "astro": "^2.6.0",
+    "astro": "^2.10.3",
     "tailwindcss": "^3.3.2"
   }
 }
