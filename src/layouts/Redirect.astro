@@ -23,13 +23,14 @@ const { title, url, redirect_page = true } = Astro.props;
 </Default>
 
 <script type="text/javascript" define:vars={{ url, redirect_page }}>
-	if (!redirect_page) return;
-	const urlObj = new URL(url);
-	var userLang = navigator.language || navigator.userLanguage;
-	if (userLang.includes('it')) {
-		urlObj.pathname = '/it' + urlObj.pathname;
-	} else {
-		urlObj.pathname = '/en' + urlObj.pathname;
+	if (redirect_page) {
+		const urlObj = new URL(url);
+		var userLang = navigator.language || navigator.userLanguage;
+		if (userLang.includes('it')) {
+			urlObj.pathname = '/it' + urlObj.pathname;
+		} else {
+			urlObj.pathname = '/en' + urlObj.pathname;
+		}
+		window.location.replace(urlObj.pathname);
 	}
-	window.location.replace(urlObj.pathname);
 </script>

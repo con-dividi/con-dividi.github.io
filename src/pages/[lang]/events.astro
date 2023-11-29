@@ -1,49 +1,60 @@
 ---
-import fs from "fs";
+import fs from 'fs';
 import Default from '~/layouts/Default.astro';
 import { Languages } from '../../utils/types';
 import main_logo from '../../assets/img/main_logo.svg';
 import Navbar from '~/components/Navbar.astro';
 import Footer from '~/components/Footer.astro';
-import CalendarTile from "~/components/CalendarTile.astro";
+import CalendarTile from '~/components/CalendarTile.astro';
 
-const calendarPath = "./data/calendar/";
+const calendarPath = './data/calendar/';
 
 const thisYear = new Date().getFullYear() - 2000;
 const calendar = await Astro.glob('../../../data/calendar/*.mdx');
-const calendarsPath = fs.readdirSync(calendarPath).filter((e) => {return e.endsWith('csv')})
-const calendarsRaw = calendarsPath.map((e) => {return fs.readFileSync(calendarPath + e, {encoding: "utf8"})});
+const calendarsPath = fs.readdirSync(calendarPath).filter((e) => {
+	return e.endsWith('csv');
+});
+const calendarsRaw = calendarsPath.map((e) => {
+	return fs.readFileSync(calendarPath + e, { encoding: 'utf8' });
+});
 
 interface Event {
-	name: string,
-	description: string,
-	date: Date,
-	poster: string
+	name: string;
+	description: string;
+	date: Date;
+	poster: string;
 }
 
-const allCalendarsParsed: string[][][] = calendarsRaw.map((e) => CSVParser(e))
-const calendars: Event[][] = allCalendarsParsed.map((e) => calendarParser(e))
+const allCalendarsParsed: string[][][] = calendarsRaw.map((e) => CSVParser(e));
+const calendars: Event[][] = allCalendarsParsed.map((e) => calendarParser(e));
 
 let allEvents: Event[] = [];
 integrityCheck(calendars);
-calendars.forEach((e) => {allEvents = allEvents.concat(e)})
+calendars.forEach((e) => {
+	allEvents = allEvents.concat(e);
+});
 
-export function integrityCheck(calendars: Event[][]){
-	calendars.forEach(calendar => {
-		let defaultDate = calendar[0].date
+export function integrityCheck(calendars: Event[][]) {
+	calendars.forEach((calendar) => {
+		let defaultDate = calendar[0].date;
 		for (let i = 0; i < calendar.length; i++) {
-			if(defaultDate.getMonth() != calendar[i].date.getMonth() || defaultDate.getFullYear() != calendar[i].date.getFullYear()){
-				throw new Error("Bad CSV, calendars must have the same month and year")
-			}			
+			if (
+				defaultDate.getMonth() != calendar[i].date.getMonth() ||
+				defaultDate.getFullYear() != calendar[i].date.getFullYear()
+			) {
+				throw new Error('Bad CSV, calendars must have the same month and year');
+			}
 		}
 	});
 }
 
-export function CSVParser(csv: string): string[][]{
-	let rows = csv.split("\n");
+export function CSVParser(csv: string): string[][] {
+	let rows = csv.split('\n');
 	rows.shift();
 	rows.pop();
-	let toReturn: string[][] = rows.map((e) => {return e.split('\t')});
+	let toReturn: string[][] = rows.map((e) => {
+		return e.split('\t');
+	});
 	return toReturn;
 }
 
@@ -56,18 +67,25 @@ export async function getStaticPaths() {
 	});
 }
 
-export function calendarParser(calendar: string[][]): Event[]{
-	return calendar.map((e) => eventParser(e))
+export function calendarParser(calendar: string[][]): Event[] {
+	return calendar.map((e) => eventParser(e));
 }
 
-export function eventParser(e: string[]): Event{
-	let daterow = e[2].split("/");
-	let timerow = e[3].split(":");
-	let date = new Date(Number(daterow[2]), Number(daterow[1]) - 1, Number(daterow[0]), Number(timerow[0]), Number(timerow[1]), Number(timerow[2]));
+export function eventParser(e: string[]): Event {
+	let daterow = e[2].split('/');
+	let timerow = e[3].split(':');
+	let date = new Date(
+		Number(daterow[2]),
+		Number(daterow[1]) - 1,
+		Number(daterow[0]),
+		Number(timerow[0]),
+		Number(timerow[1]),
+		Number(timerow[2])
+	);
 	let name = e[0];
 	let description = e[1];
 	let poster = e[4];
-	return {name: name, description: description, date: date, poster: poster}
+	return { name: name, description: description, date: date, poster: poster };
 }
 
 const { language } = Astro.props;
@@ -112,22 +130,48 @@ const { language } = Astro.props;
 	</header>
 	<div class="p-4 min-h-150">
 		{
-			<>
-				<h2 class="lg:flex rounded-lg text-2xl my-5 lg:mx-20">{language == Languages.IT? "Eventi questo mese": "Upcoming events"}</h2>
-				{
-				allEvents.filter((e) => e.date.getTime() > (new Date).setDate((new Date).getDate() - 1)).map(
-					(e) => {
-						return <CalendarTile name={e.name} description={e.description} date={e.date} link={e.poster} language={language} history={false}></CalendarTile>
-					}
-				)}
-				<h2 class="lg:flex rounded-lg text-2xl my-5 lg:mx-20 pt-10">{language == Languages.IT? "Eventi Passati": "Expired Events"}</h2>
-				{
-					allEvents.filter((e) => (e.date.getTime() < (new Date).setDate((new Date).getDate() - 1) && e.date.getTime() > (new Date).setMonth((new Date).getMonth() - 1))).map(
-					(e) => {
-						return <CalendarTile name={e.name} description={e.description} date={e.date} link={e.poster} language={language} history={true}></CalendarTile>
-					}
-				)}
-			</>
+			(
+				<>
+					<h2 class="lg:flex rounded-lg text-2xl my-5 lg:mx-20">
+						{language == Languages.IT ? 'Eventi questo mese' : 'Upcoming events'}
+					</h2>
+					{allEvents
+						.filter((e) => e.date.getTime() > new Date().setDate(new Date().getDate() - 1))
+						.map((e) => {
+							return (
+								<CalendarTile
+									name={e.name}
+									description={e.description}
+									date={e.date}
+									link={e.poster}
+									language={language}
+									history={false}
+								/>
+							);
+						})}
+					<h2 class="lg:flex rounded-lg text-2xl my-5 lg:mx-20 pt-10">
+						{language == Languages.IT ? 'Eventi Passati' : 'Expired Events'}
+					</h2>
+					{allEvents
+						.filter(
+							(e) =>
+								e.date.getTime() < new Date().setDate(new Date().getDate() - 1) &&
+								e.date.getTime() > new Date().setMonth(new Date().getMonth() - 1)
+						)
+						.map((e) => {
+							return (
+								<CalendarTile
+									name={e.name}
+									description={e.description}
+									date={e.date}
+									link={e.poster}
+									language={language}
+									history={true}
+								/>
+							);
+						})}
+				</>
+			)
 		}
 	</div>
 	<Footer language={language} />
