@@ -48,12 +48,24 @@ const files = [
 	'-DSC_5105.jpg',
 	'DSC_5106.top.jpg',
 ];
-const keepFiles = files.filter((e) => {
-	return e.at(0) != '-';
-});
+const keepFiles = files
+	.filter((e) => {
+		return e.at(0) != '-';
+	})
+	.map((e) => {
+		let split = e.split('.');
+		split.pop();
+		let toReturn: string = '';
+		split.forEach((e) => {
+			toReturn += e + '.';
+		});
+		return toReturn;
+	});
 const images = imagesRaw.filter((e: { default: string }) => {
-	return keepFiles.includes(e.default.split('/').at(-1) || '');
+	let split = e.default.split('/');
+	return keepFiles.filter((i) => split[split.length - 1].startsWith(i)).length > 0;
 });
+console.log(images);
 export async function getStaticPaths() {
 	return Languages.values().map((language: any) => {
 		return {
