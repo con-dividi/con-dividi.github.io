@@ -6,7 +6,19 @@ import Navbar from '~/components/Navbar.astro';
 import Footer from '~/components/Footer.astro';
 import Modal from '~/components/Modal.astro';
 import ModalContent from '~/components/ModalContent.astro';
-const images = await Astro.glob('../../assets/opt_img/carousel/*.jpg');
+
+const imagesRaw = await Astro.glob('../../assets/opt_img/carousel/*.jpg');
+const files = [
+    "DSC_5037.jpg", "DSC_5041.jpg", "-DSC_5042.jpg", "DSC_5044.jpg", "DSC_5047.jpg", "DSC_5051.jpg", 
+    "-DSC_5052.jpg", "DSC_5053.jpg", "-DSC_5054.top.jpg", "DSC_5055.jpg", "-DSC_5056.jpg", "DSC_5057.jpg", 
+    "-DSC_5058.jpg", "-DSC_5059.jpg", "DSC_5062.top.jpg", "DSC_5063.top.jpg", "-DSC_5066.jpg", "DSC_5067.top.jpg", 
+    "-DSC_5068.jpg", "-DSC_5076.jpg", "-DSC_5077.jpg", "DSC_5078.top.jpg", "-DSC_5079.jpg", "-DSC_5080.jpg", 
+    "-DSC_5082.jpg", "DSC_5084.top.jpg", "-DSC_5086.jpg", "-DSC_5087.jpg", "DSC_5088.jpg", "-DSC_5090.jpg", 
+    "DSC_5092.top.jpg", "DSC_5095.jpg", "-DSC_5096.jpg", "DSC_5098.jpg", "DSC_5100.jpg", "DSC_5104.top.jpg", 
+    "-DSC_5105.jpg", "DSC_5106.top.jpg"
+]
+const keepFiles = files.filter((e) => {return e.at(0) != "-"});
+const images = imagesRaw.filter((e: {default: string}) => {return keepFiles.includes(e.default.split('/').at(-1) || "")});
 export async function getStaticPaths() {
 	return Languages.values().map((language: any) => {
 		return {
@@ -20,7 +32,7 @@ const { language } = Astro.props;
 
 <Default title="homepage">
 	<header class="relative">
-		<Navbar current={1} language={language} />
+		<Navbar current={2} language={language} />
 		<div
 			class="background_gradient md:pt-0 md:h-100 h-[70%] flex flex-col w-full items-center justify-center text-white pt-25"
 		>
@@ -60,8 +72,8 @@ const { language } = Astro.props;
 			{
 				images.map((e, i) => {
 					return (
-						<div>
-							<img class="h-auto max-w-full rounded-lg" src={e.default} alt="" onclick={'triggerDialog(' + i + ')'} />
+						<div class="grid">
+							<img class="m-auto h-auto max-w-full rounded-lg" src={e.default} alt="" onclick={'triggerDialog(' + i + ')'} />
 							<Modal index={i}>
 								<ModalContent i={i} image={e} />
 							</Modal>

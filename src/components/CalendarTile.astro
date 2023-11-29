@@ -1,0 +1,71 @@
+---
+import { Languages } from '~/utils/types';
+export interface Props {
+	name: string;
+	description: string;
+	date: Date;
+	link: string;
+	language: string;
+	history: boolean;
+}
+
+
+const { name, description, date, link, language, history } = Astro.props;
+
+let time_text = '';
+let posterText = '';
+switch (language) {
+	case 'it':
+		time_text = 'Alle ';
+		posterText = 'Guarda la locandina ';
+		break;
+	case 'en':
+		time_text = 'At time ';
+		posterText = 'See the poster '
+		break;
+	default:
+		break;
+}
+
+let calendarColor = "rounded-lg lg:w-2/12 py-4 block h-auto shadow-inner flex";
+if (!history){
+	calendarColor += " bg-blue-600"
+} else {
+	calendarColor += " bg-gray-600"
+}
+
+let backgroundColor = "lg:flex rounded-lg border border-gray-400 my-5 lg:mx-20";
+if (!history){
+	backgroundColor += ""
+} else {
+	backgroundColor += " bg-gray-200"
+}
+
+const localLanguage = language == Languages.IT ? "it-IT": "default";
+---
+
+<div class={backgroundColor}>
+	<div class={calendarColor}>
+		<div class="m-auto">
+			<div class="text-center tracking-wide">
+				<div class="text-white font-bold text-4xl">{date.getDate()}</div>
+				<div class="text-white font-normal text-2xl">{date.toLocaleString(localLanguage, { month: 'long' })}</div>
+			</div>
+		</div>
+	</div>
+	<div class="w-full lg:w-11/12 xl:w-full px-1 py-5 lg:px-2 lg:py-2 tracking-wide rounded-lg">
+		<div class="flex flex-row lg:justify-start justify-center">
+			<div class="text-gray-700 font-medium text-sm text-center lg:text-left px-2">
+					{history?<div class="text-red-500">{language == Languages.IT ? "Evento Passato" : "Expired Event"}</div> : <></>}<i class="far fa-clock" /> {time_text + date.getHours()}:{date.getMinutes().toString()}
+			</div>
+		</div>
+		<div class="font-semibold text-gray-800 text-xl text-center lg:text-left pt-2 px-2">{name}</div>
+		<div class="sans_regular text-gray-800 text-xl text-center lg:text-left px-2">{description}</div>
+		<div class="text-gray-600 font-medium text-sm pt-1 text-center lg:text-left px-2">
+			{'Via Carvina 1, 6807 Taverne'}
+		</div>
+		<div class="text-gray-600 font-medium text-sm pt-1 text-center lg:text-left px-2">
+			{<a href={link} target="_blank">{posterText}</a>}
+		</div>
+	</div>
+</div>

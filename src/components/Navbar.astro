@@ -27,16 +27,16 @@ let slugs = ['', 'events', 'fotos'];
 					list.map((e, i) => {
 						let additional_css = '';
 						if (i == current) {
-							additional_css = ' sanslight';
+							additional_css = ' sansbold';
 						}
 						return (
 							<li>
 								<a
 									href={'/' + language + '/' + slugs[i]}
-									class="sansregular block py-2 pl-3 pr-4 text-white rounded bg-transparent md:p-0"
+									class="sanslight block py-2 pl-3 pr-4 text-white rounded bg-transparent md:p-0"
 									aria-current="page"
 								>
-									<h4 class={' font-thin ' + additional_css}>{e[Languages.toNum(language)]}</h4>
+									<h4 class={' ' + additional_css}>{e[Languages.toNum(language)]}</h4>
 								</a>
 							</li>
 						);
