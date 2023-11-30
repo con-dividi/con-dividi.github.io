@@ -10,6 +10,7 @@ export default defineConfig({
 		extend: {
 			colors: {
 				fucsia: '#dc3189',
+				bgyellow: '#dc9831',
 			},
 			gridTemplateRows: {
 				// Simple 8 row grid

@@ -27,16 +27,13 @@ switch (language) {
 }
 
 let calendarColor = 'rounded-lg lg:w-2/12 py-4 block h-auto shadow-inner flex';
-if (!history) {
-	calendarColor += ' bg-blue-600';
-} else {
-	calendarColor += ' bg-gray-600';
-}
-
+let posterColor = 'font-medium text-sm pt-1 text-center lg:text-left px-2';
 let backgroundColor = 'lg:flex rounded-lg border border-gray-400 my-5 lg:mx-20';
 if (!history) {
-	backgroundColor += '';
+	calendarColor += ' bg-fucsia';
+	posterColor += ' text-yellow-500';
 } else {
+	calendarColor += ' bg-gray-600';
 	backgroundColor += ' bg-gray-200';
 }
 
@@ -66,7 +63,7 @@ const localLanguage = language == Languages.IT ? 'it-IT' : 'default';
 		<div class="text-gray-600 font-medium text-sm pt-1 text-center lg:text-left px-2">
 			{'Via Carvina 1, 6807 Taverne'}
 		</div>
-		<div class="text-orange-600 font-medium text-sm pt-1 text-center lg:text-left px-2">
+		<div class={posterColor}>
 			{
 				(
 					<a href={link} target="_blank">
