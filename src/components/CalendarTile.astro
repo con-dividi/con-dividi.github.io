@@ -58,7 +58,7 @@ const localLanguage = language == Languages.IT ? 'it-IT' : 'default';
 				{
 					history ? <div class="text-red-500">{language == Languages.IT ? 'Evento Passato' : 'Expired Event'}</div> : ''
 				}<i class="far fa-clock"></i>
-				{time_text + date.getHours()}:{date.getMinutes().toString()}
+				{time_text + date.getHours()}:{date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes()}
 			</div>
 		</div>
 		<div class="font-semibold text-gray-800 text-xl text-center lg:text-left pt-2 px-2">{name}</div>

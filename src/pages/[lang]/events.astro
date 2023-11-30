@@ -9,8 +9,6 @@ import CalendarTile from '~/components/CalendarTile.astro';
 
 const calendarPath = './data/calendar/';
 
-const thisYear = new Date().getFullYear() - 2000;
-const calendar = await Astro.glob('../../../data/calendar/*.mdx');
 const calendarsPath = fs.readdirSync(calendarPath).filter((e) => {
 	return e.endsWith('csv');
 });
@@ -53,7 +51,26 @@ export function CSVParser(csv: string): string[][] {
 	rows.shift();
 	rows.pop();
 	let toReturn: string[][] = rows.map((e) => {
-		return e.split('\t');
+		let insideText = false;
+
+		let startIndex = 0;
+		const toReturn: string[] = [];
+		for (let i = 0; i < e.length; i++) {
+			const element = e[i];
+			if (element === '"' && (e[i - 1] === ',' || (i === e.length - 1 ? true : e[i + 1] === ','))) {
+				insideText = !insideText;
+			}
+			if (element === ',' && !insideText) {
+				if (e[startIndex] === '"' && e[i - 1] === '"') toReturn.push(e.substring(startIndex + 1, i - 1));
+				else toReturn.push(e.substring(startIndex, i));
+				startIndex = i + 1;
+			}
+			if (i === e.length - 1) {
+				if (e[startIndex] === '"' && e[i - 1] === '"') toReturn.push(e.substring(startIndex + 1));
+				else toReturn.push(e.substring(startIndex));
+			}
+		}
+		return toReturn;
 	});
 	return toReturn;
 }
@@ -85,6 +102,7 @@ export function eventParser(e: string[]): Event {
 	let name = e[0];
 	let description = e[1];
 	let poster = e[4];
+	console.log(e);
 	return { name: name, description: description, date: date, poster: poster };
 }
 
