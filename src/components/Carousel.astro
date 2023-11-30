@@ -91,7 +91,6 @@ const { images } = Astro.props;
 		if (next == null) {
 			e = 0;
 		}
-		console.log(i, e);
 		document.getElementById('modal_' + i)?.classList.toggle('hidden');
 		document.getElementById('modal_' + e)?.classList.toggle('hidden');
 	}
@@ -101,7 +100,6 @@ const { images } = Astro.props;
 		if (i == 0) {
 			e = document.querySelectorAll('._modal').length - 1;
 		}
-		console.log(i, e);
 		document.getElementById('modal_' + i)?.classList.toggle('hidden');
 		document.getElementById('modal_' + e)?.classList.toggle('hidden');
 	}
