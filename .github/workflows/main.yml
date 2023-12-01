@@ -21,7 +21,7 @@ jobs:
       - name: Checkout your repository using git
         uses: actions/checkout@v2
       - name: Install Dep
-        run: yarn
+        run: npm install -g sharp rimraf
       - name: Optimize Images
         run: yarn optimize-images
       - name: Install, build, and upload your site
