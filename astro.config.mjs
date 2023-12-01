@@ -5,7 +5,6 @@ import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
 import WindiCSS from 'vite-plugin-windicss';
-import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import { SITE } from './src/config.mjs';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -62,7 +61,7 @@ export default defineConfig({
 		}),
 	],
 	vite: {
-		plugins: [WindiCSS(), ViteImageOptimizer(DEFAULT_OPTIONS)],
+		plugins: [WindiCSS()],
 		resolve: {
 			alias: {
 				'~': path.resolve(__dirname, './src'),
