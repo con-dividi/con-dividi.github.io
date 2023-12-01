@@ -66,15 +66,15 @@ const { language } = Astro.props;
 	</header>
 
 	<main class="relative flex flex-col py-50px">
-		<Section title={chi_siamo.filter((e) => e.frontmatter.lang === language)[0].frontmatter.title}>
-			{chi_siamo.map((item) => (item.frontmatter.lang === language ? <item.Content /> : ''))}
+		<Section title={chi_siamo.filter((e: any) => e.frontmatter.lang === language)[0].frontmatter.title}>
+			{chi_siamo.map((item: any) => (item.frontmatter.lang === language ? <item.Content /> : ''))}
 		</Section>
-		<Section title={missione.filter((e) => e.frontmatter.lang === language)[0].frontmatter.title}>
-			{missione.map((item) => (item.frontmatter.lang === language ? <item.Content /> : ''))}
+		<Section title={missione.filter((e: any) => e.frontmatter.lang === language)[0].frontmatter.title}>
+			{missione.map((item: any) => (item.frontmatter.lang === language ? <item.Content /> : ''))}
 		</Section>
-		<Section title={diventa_volontario.filter((e) => e.frontmatter.lang === language)[0].frontmatter.title}>
+		<Section title={diventa_volontario.filter((e: any) => e.frontmatter.lang === language)[0].frontmatter.title}>
 			{
-				diventa_volontario.map((item) =>
+				diventa_volontario.map((item: any) =>
 					item.frontmatter.lang === language ? (
 						<>
 							<item.Content />
@@ -86,9 +86,9 @@ const { language } = Astro.props;
 				)
 			}
 		</Section>
-		<Section title={proposte.filter((e) => e.frontmatter.lang === language)[0].frontmatter.title}>
+		<Section title={proposte.filter((e: any) => e.frontmatter.lang === language)[0].frontmatter.title}>
 			{
-				proposte.map((item) =>
+				proposte.map((item: any) =>
 					item.frontmatter.lang === language ? (
 						<div class="flex">
 							<div class="prose mt-4 m-auto">
@@ -114,11 +114,11 @@ const { language } = Astro.props;
 				)
 			}
 		</Section>
-		<Section title={affitto.filter((e) => e.frontmatter.lang === language)[0].frontmatter.title}>
-			{affitto.map((item) => (item.frontmatter.lang === language ? <item.Content /> : ''))}
+		<Section title={affitto.filter((e: any) => e.frontmatter.lang === language)[0].frontmatter.title}>
+			{affitto.map((item: any) => (item.frontmatter.lang === language ? <item.Content /> : ''))}
 		</Section>
-		<Section title={sostienici.filter((e) => e.frontmatter.lang === language)[0].frontmatter.title}>
-			{sostienici.map((item) => (item.frontmatter.lang === language ? <item.Content /> : ''))}
+		<Section title={sostienici.filter((e: any) => e.frontmatter.lang === language)[0].frontmatter.title}>
+			{sostienici.map((item: any) => (item.frontmatter.lang === language ? <item.Content /> : ''))}
 		</Section>
 		<Section title="Contattaci">
 			<div>

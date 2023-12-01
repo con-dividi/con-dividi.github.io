@@ -11,7 +11,7 @@ const { images } = Astro.props;
 <div id="custom-controls-gallerys" class="relative w-full py-50px" data-carousel="slide">
 	<div class="relative h-56 2xl:h-128 overflow-hidden rounded-lg md:h-96">
 		{
-			images.map((e, i) => {
+			images.map((e: any, i: any) => {
 				return (
 					<>
 						<div class="hidden duration-700 ease-in-out" data-carousel-item>

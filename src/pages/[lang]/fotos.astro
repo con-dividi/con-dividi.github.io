@@ -116,7 +116,7 @@ const { language } = Astro.props;
 	<div class="p-4 min-h-150">
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 			{
-				images.map((e, i) => {
+				images.map((e: any, i: any) => {
 					return (
 						<div class="grid">
 							<img

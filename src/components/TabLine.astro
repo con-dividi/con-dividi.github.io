@@ -17,7 +17,7 @@ const { links } = Astro.props;
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-y-3 gap-y-3 gap-x-5">
 	{
-		links.map((e) => {
+		links.map((e: any) => {
 			return (
 				<ButtonUrl
 					icon_class={e.platform == 'wa' ? 'fa fa-whatsapp' : 'fa fa-telegram'}
