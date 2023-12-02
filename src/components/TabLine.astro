@@ -1,5 +1,5 @@
 ---
-import ButtonUrl from './ButtonUrl.astro';
+import ButtonUrl from "./ButtonUrl.astro";
 export interface Props {
 	links: {
 		course_id: string;
@@ -20,12 +20,14 @@ const { links } = Astro.props;
 		links.map((e: any) => {
 			return (
 				<ButtonUrl
-					icon_class={e.platform == 'wa' ? 'fa fa-whatsapp' : 'fa fa-telegram'}
+					icon_class={e.platform == "wa" ? "fa fa-whatsapp" : "fa fa-telegram"}
 					name={e.display_name}
 					group_id={e.id}
 					platform={e.platform}
 					prefix={e.prefix}
-					random={e.course_id + '-' + e.year + '-' + e.section + '-' + Math.random()}
+					random={
+						e.course_id + "-" + e.year + "-" + e.section + "-" + Math.random()
+					}
 				/>
 			);
 		})

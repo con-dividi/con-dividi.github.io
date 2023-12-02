@@ -17,10 +17,18 @@ installFFmpeg() {
 
 # Function to process images using FFmpeg
 processImage() {
-    echo "Processing image"
     local sourcePath=$1
     local targetPath=$2
-    ffmpeg -i "$sourcePath" -qscale:v 2 "$targetPath" # Adjust quality with qscale
+
+    # Determine the output format based on the file extension
+    case "$targetPath" in
+        *.jpg|*.jpeg)
+            ffmpeg -i "$sourcePath" -compression_level 3 -q:v 2 "$targetPath"
+            ;;
+        *.png)
+            ffmpeg -i "$sourcePath" -compression_level 3 "$targetPath"
+            ;;
+    esac
 }
 
 # Function to remove a directory

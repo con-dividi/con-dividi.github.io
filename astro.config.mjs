@@ -1,14 +1,12 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
-import mdx from '@astrojs/mdx';
-import partytown from '@astrojs/partytown';
-import WindiCSS from 'vite-plugin-windicss';
-import { SITE } from './src/config.mjs';
+import path from "path";
+import { fileURLToPath } from "url";
+import { defineConfig } from "astro/config";
+import sitemap from "@astrojs/sitemap";
+import mdx from "@astrojs/mdx";
+import WindiCSS from "vite-plugin-windicss";
+import { SITE } from "./src/config.mjs";
+import tailwind from "@astrojs/tailwind";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-// https://astro.build/config
 
 const DEFAULT_OPTIONS = {
 	test: /\.(jpe?g|png|gif|tiff|webp|svg|avif)$/i,
@@ -50,21 +48,13 @@ export default defineConfig({
 	// Astro uses this full URL to generate your sitemap and canonical URLs in your final build
 	site: SITE.origin,
 	base: SITE.basePathname,
-	output: 'static',
-	integrations: [
-		sitemap(),
-		mdx(),
-		partytown({
-			config: {
-				forward: ['dataLayer.push'],
-			},
-		}),
-	],
+	output: "static",
+	integrations: [sitemap(), mdx(), tailwind()],
 	vite: {
 		plugins: [WindiCSS()],
 		resolve: {
 			alias: {
-				'~': path.resolve(__dirname, './src'),
+				"~": path.resolve(__dirname, "./src"),
 			},
 		},
 	},

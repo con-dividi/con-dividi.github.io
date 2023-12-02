@@ -4,7 +4,7 @@
   "version": "0.7.0",
   "private": true,
   "scripts": {
-    "dev": "yarn optimize-images && astro dev",
+    "dev": "astro dev",
     "start": "astro dev",
     "optimize-images": "./scripts/optimize-images.sh",
     "build": "yarn optimize-images && astro build",
@@ -17,29 +17,25 @@
     "subfont": "subfont -ir --no-fallbacks --silent --root dist"
   },
   "devDependencies": {
-    "@astrojs/mdx": "^0.19.1",
-    "@astrojs/partytown": "^1.0.1",
-    "@astrojs/rss": "^1.2.1",
-    "@astrojs/sitemap": "^1.0.0",
-    "@astrolib/analytics": "^0.2.4",
-    "@astrolib/seo": "^0.2.1",
-    "@fontsource/inter": "^4.5.14",
-    "@typescript-eslint/eslint-plugin": "^5.47.1",
+    "@astrojs/mdx": "^1.1.5",
+    "@astrojs/rss": "^3.0.0",
+    "@astrojs/sitemap": "^3.0.3",
+    "@astrolib/analytics": "^0.4.2",
+    "@astrolib/seo": "^0.6.0",
+    "@fontsource/inter": "^5.0.15",
+    "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
     "astro-icon": "^0.8.0",
-    "eslint": "^8.54.0",
+    "eslint": "^8.55.0",
     "eslint-plugin-astro": "^0.30.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
-    "flowbite": "^1.6.5",
-    "limax": "^3.0.0",
-    "mdast-util-to-string": "^3.1.0",
-    "prettier": "^2.8.1",
-    "prettier-plugin-astro": "^0.7.0",
+    "limax": "^4.1.0",
+    "mdast-util-to-string": "^4.0.0",
+    "prettier": "^3.1.0",
+    "prettier-plugin-astro": "^0.12.2",
     "reading-time": "^1.5.0",
-    "sharp": "^0.33.0",
     "subfont": "^6.12.2",
-    "typescript": "^4.9.4",
-    "vite-plugin-image-optimizer": "^1.1.6",
+    "typescript": "^5.3.2",
     "vite-plugin-windicss": "^1.8.8",
     "windicss": "^3.5.6",
     "yaml-schema-validator": "^1.2.3"
@@ -60,7 +56,9 @@
     ]
   },
   "dependencies": {
-    "astro": "^2.6.0",
-    "tailwindcss": "^3.3.2"
+    "@astrojs/tailwind": "^5.0.2",
+    "astro": "3.6.4",
+    "flowbite": "^2.1.1",
+    "tailwindcss": "^3.0.24"
   }
 }

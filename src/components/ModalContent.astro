@@ -1,5 +1,5 @@
 ---
-import Modal from './Modal.astro';
+import Modal from "./Modal.astro";
 
 export interface Props {
 	i: number;
@@ -15,7 +15,7 @@ const { i, image } = Astro.props;
 			<button
 				type="button"
 				class="row-start-2 md:row-start-1 h-fit m-auto md:ml-auto md:mr-10 my-auto flex cursor-pointer group focus:outline-none"
-				onclick={'prevImage(' + i + ')'}
+				onclick={"prevImage(" + i + ")"}
 			>
 				<span class="text-gray-400 hover:text-gray-900 dark:hover:text-white group-focus:text-gray-900 dark:group-focus:text-white">
 					<svg
@@ -36,7 +36,7 @@ const { i, image } = Astro.props;
 			</button>
 			<div class="row-start-1 col-span-2 md:col-span-1 md:w-80vw md:h-full my-auto w-full grid">
 				<img
-					src={image.default}
+					src={image.default.src}
 					alt=""
 					class="md:max-w-80vw max-h-80vh md:max-h-100vh md:py-10 h-auto max-h-full m-auto"
 				/>
@@ -44,7 +44,7 @@ const { i, image } = Astro.props;
 			<button
 				type="button"
 				class="row-start-2 md:row-start-1 h-fit m-auto md:ml-auto md:ml-10 my-auto flex cursor-pointer group focus:outline-none"
-				onclick={'nextImage(' + i + ')'}
+				onclick={"nextImage(" + i + ")"}
 			>
 				<span class="h-fit text-gray-400 hover:text-gray-900 dark:hover:text-white group-focus:text-gray-900 dark:group-focus:text-white">
 					<svg

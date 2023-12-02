@@ -1,5 +1,5 @@
 ---
-import { Languages } from '~/utils/types';
+import { Languages } from "~/utils/types";
 
 export interface Props {
 	language: Languages;
@@ -15,7 +15,7 @@ let languageSwitch = Languages.languageSwitchPages(Astro.url);
 	</div>
 	<div class="items-center justify-center flex">
 		{
-			language === 'it' ? (
+			language === "it" ? (
 				<a href={languageSwitch[Languages.toNum(Languages.EN)]}>
 					<div>Switch to English</div>
 				</a>

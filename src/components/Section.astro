@@ -9,7 +9,9 @@ const { title, text } = Astro.props;
 <section
 	class="mx-auto w-[90%] md:w-[80%] text-fucsia overflow-hidden flex flex-col items-center my-[4vh] rounded-[20px] shadow_box"
 >
-	<h2 class="mt-50px font-bold mb-15px text-3xl w-9/10 md:w-full text-center">{title}</h2>
+	<h2 class="mt-50px font-bold mb-15px text-3xl w-9/10 md:w-full text-center">
+		{title}
+	</h2>
 	<div class="mb-50px mx-50px text-justify text-black w-3/4 list-disc">
 		{
 			text != undefined && (

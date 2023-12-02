@@ -1,0 +1,44 @@
+---
+export interface Props {
+	language: Languages;
+}
+const { language } = Astro.props;
+
+import main_logo from "~/assets/img/main_logo.svg";
+import { Languages } from "~/utils/types";
+---
+
+<div
+	class="background_gradient md:pt-0 h-70% md:h-100 flex flex-col w-full items-center justify-center text-white pt-25"
+>
+	<img src={main_logo.src} alt="" class="mb-20px w-100px h-100px" />
+	<h1 class="mb-50px text-5xl mx-auto text-center">
+		{
+			language == "it" ? (
+				<>
+					Centro <b>Con-Dividi</b>
+				</>
+			) : (
+				<>
+					<b>Con-Dividi</b> Center
+				</>
+			)
+		}
+	</h1>
+	<h2 class="text-white px-5 pb-5 md:p-0 text-center">
+		{
+			language == "it" ? (
+				<>
+					Incontri, mostre, laboratori e dibattiti per diffondere e
+					sensibilizzare tutti, sui temi dell'infanzia, dell'adolescenza e della
+					famiglia.
+				</>
+			) : (
+				<>
+					Meetings, exhibitions, workshops, and debates to spread awareness and
+					educate everyone on the topics of childhood, adolescence, and family.
+				</>
+			)
+		}
+	</h2>
+</div>

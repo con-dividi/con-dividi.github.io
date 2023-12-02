@@ -1,12 +1,12 @@
 export const SITE = {
-	name: 'Astro Template',
+	name: "Astro Template",
 
-	origin: 'https://subdomain.domain.org',
-	basePathname: '/',
+	origin: "https://subdomain.domain.org",
+	basePathname: "/",
 
-	title: 'Astro Template',
-	description: 'Astro Template',
+	title: "Astro Template",
+	description: "Astro Template",
 
 	googleAnalyticsId: false, // or "G-XXXXXXXXXX",
-	googleSiteVerificationId: '', // verificationId,
+	googleSiteVerificationId: "", // verificationId,
 };

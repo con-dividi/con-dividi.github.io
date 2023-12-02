@@ -4,17 +4,17 @@
 
 @font-face {
 	font-family: sansregular;
-	src: url('/font/OpenSans-Regular.ttf');
+	src: url("/font/OpenSans-Regular.ttf");
 }
 
 @font-face {
 	font-family: sansbold;
-	src: url('/font/OpenSans-Bold.ttf');
+	src: url("/font/OpenSans-Bold.ttf");
 }
 
 @font-face {
 	font-family: sanslight;
-	src: url('/font/OpenSans-Light.ttf');
+	src: url("/font/OpenSans-Light.ttf");
 }
 
 :root {
@@ -36,44 +36,44 @@
 }
 
 html {
-	font-family: 'sansregular';
+	font-family: "sansregular";
 	scroll-behavior: smooth;
 }
 
 h1 {
-	font-family: 'sansbold';
+	font-family: "sansbold";
 }
 
 .sansbold {
-	font-family: 'sansbold';
+	font-family: "sansbold";
 }
 
 .sanslight {
-	font-family: 'sanslight';
+	font-family: "sanslight";
 }
 
 .sansregular {
-	font-family: 'sansregular';
+	font-family: "sansregular";
 }
 
 h2 {
-	font-family: 'sanslight';
+	font-family: "sanslight";
 }
 
 li {
-	font-family: 'sanslight';
+	font-family: "sanslight";
 }
 
 h3 {
-	font-family: 'sanslight';
+	font-family: "sanslight";
 }
 
 p {
-	font-family: 'sanslight';
+	font-family: "sanslight";
 }
 
 b {
-	font-family: 'sansbold';
+	font-family: "sansbold";
 }
 
 blockquote {

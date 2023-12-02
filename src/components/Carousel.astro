@@ -1,6 +1,6 @@
 ---
-import Modal from './Modal.astro';
-import ModalContent from './ModalContent.astro';
+import Modal from "./Modal.astro";
+import ModalContent from "./ModalContent.astro";
 
 export interface Props {
 	images: Record<string, any>[];
@@ -8,99 +8,196 @@ export interface Props {
 const { images } = Astro.props;
 ---
 
-<div id="custom-controls-gallerys" class="relative w-full py-50px" data-carousel="slide">
-	<div class="relative h-56 2xl:h-128 overflow-hidden rounded-lg md:h-96">
-		{
-			images.map((e: any, i: any) => {
-				return (
-					<>
-						<div class="hidden duration-700 ease-in-out" data-carousel-item>
-							<img
-								src={e.default}
-								alt=""
-								class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-								onclick={'triggerDialog(' + i + ')'}
+<div id="custom-controls-gallerys" class="relative w-full py-50px">
+	<div id="carousel-1" class="relative w-full">
+		<!-- Carousel wrapper -->
+		<div
+			class="relative h-56 overflow-hidden rounded-lg sm:h-64 xl:h-80 2xl:h-96"
+		>
+			{
+				images.map((e: any, i: any) => {
+					return (
+						<>
+							<div
+								id={"carousel-item-" + i}
+								class="hidden duration-700 ease-in-out"
+							>
+								<img
+									src={e.default.src}
+									class="absolute left-1/2 top-1/2 block w-full -translate-x-1/2 -translate-y-1/2"
+									alt="..."
+									onclick={"triggerDialog( " + i + ")"}
+								/>
+							</div>
+							<Modal index={i}>
+								<ModalContent i={i} image={e} />
+							</Modal>
+						</>
+					);
+				})
+			}
+			<div
+				class="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse"
+			>
+				{
+					images.map((e: any, i: any) => {
+						return (
+							<button
+								id={"carousel-indicator-" + i}
+								type="button"
+								class="h-3 w-3 rounded-full"
+								aria-current="true"
+								aria-label="Slide 1"
 							/>
-						</div>
-						<Modal index={i}>
-							<ModalContent i={i} image={e} />
-						</Modal>
-					</>
-				);
-			})
-		}
-	</div>
-	<div class="flex justify-center items-center pt-4">
+						);
+					})
+				}
+			</div>
+		</div>
 		<button
+			id="data-carousel-prev"
 			type="button"
-			class="flex justify-center items-center mr-4 h-full cursor-pointer group focus:outline-none"
-			data-carousel-prev
+			class="group absolute left-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none"
 		>
 			<span
-				class="text-gray-400 hover:text-gray-900 dark:hover:text-white group-focus:text-gray-900 dark:group-focus:text-white"
+				class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/30 group-hover:bg-white/50 group-focus:outline-none group-focus:ring-4 group-focus:ring-white dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 dark:group-focus:ring-gray-800/70"
 			>
 				<svg
+					class="h-4 w-4 text-white dark:text-gray-800"
 					aria-hidden="true"
-					class="w-6 h-6"
-					fill="currentColor"
-					viewBox="0 0 20 20"
 					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 6 10"
 				>
 					<path
-						fill-rule="evenodd"
-						d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
-						clip-rule="evenodd"></path>
+						stroke="currentColor"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M5 1 1 5l4 4"></path>
 				</svg>
-				<span class="sr-only">Previous</span>
+				<span class="hidden">Previous</span>
 			</span>
 		</button>
 		<button
+			id="data-carousel-next"
 			type="button"
-			class="flex justify-center items-center h-full cursor-pointer group focus:outline-none"
-			data-carousel-next
+			class="group absolute right-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none"
 		>
 			<span
-				class="text-gray-400 hover:text-gray-900 dark:hover:text-white group-focus:text-gray-900 dark:group-focus:text-white"
+				class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/30 group-hover:bg-white/50 group-focus:outline-none group-focus:ring-4 group-focus:ring-white dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 dark:group-focus:ring-gray-800/70"
 			>
 				<svg
+					class="h-4 w-4 text-white dark:text-gray-800"
 					aria-hidden="true"
-					class="w-6 h-6"
-					fill="currentColor"
-					viewBox="0 0 20 20"
 					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 6 10"
 				>
 					<path
-						fill-rule="evenodd"
-						d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-						clip-rule="evenodd"></path>
+						stroke="currentColor"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="m1 9 4-4-4-4"></path>
 				</svg>
-				<span class="sr-only">Next</span>
+				<span class="hidden">Next</span>
 			</span>
 		</button>
 	</div>
 </div>
 
+<script>
+	import { Carousel } from "flowbite";
+	import type {
+		CarouselItem,
+		CarouselOptions,
+		CarouselInterface,
+	} from "flowbite";
+	import type { InstanceOptions } from "flowbite";
+
+	const carouselElement = document.getElementById("carousel-1");
+	if (carouselElement != null) {
+		const carousel_items = document.querySelectorAll('[id^="carousel-item-"]');
+		const carousel_indicators = document.querySelectorAll(
+			'[id^="carousel-indicators-"]',
+		);
+		const items: CarouselItem[] = [];
+		const options: CarouselOptions = {
+			defaultPosition: 1,
+			interval: 3000,
+
+			indicators: {
+				activeClasses: "bg-white dark:bg-gray-800",
+				inactiveClasses:
+					"bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800",
+				items: [],
+			},
+		};
+		carousel_items.forEach((el, i) => {
+			items.push({
+				position: i,
+				el: el as HTMLElement,
+			});
+		});
+		carousel_indicators.forEach((el, i) => {
+			options.indicators?.items?.push({
+				position: 0,
+				el: el as HTMLElement,
+			});
+		});
+
+		// instance options object
+		const instanceOptions: InstanceOptions = {
+			id: "carousel-1",
+			override: true,
+		};
+
+		const carousel: CarouselInterface = new Carousel(
+			carouselElement,
+			items,
+			options,
+			instanceOptions,
+		);
+
+		carousel.cycle();
+
+		// set event listeners for prev and next buttons
+		const $prevButton = document.getElementById("data-carousel-prev");
+		const $nextButton = document.getElementById("data-carousel-next");
+		if ($prevButton != null && $nextButton != null) {
+			$prevButton.addEventListener("click", () => {
+				carousel.prev();
+			});
+
+			$nextButton.addEventListener("click", () => {
+				carousel.next();
+			});
+		}
+	}
+</script>
+
 <script is:inline>
 	function triggerDialog(i) {
-		document.getElementById('modal_' + i)?.classList.toggle('hidden');
+		document.getElementById("modal_" + i)?.classList.toggle("hidden");
 	}
 
 	function nextImage(i) {
 		let e = i + 1;
-		let next = document.getElementById('modal_' + e);
+		let next = document.getElementById("modal_" + e);
 		if (next == null) {
 			e = 0;
 		}
-		document.getElementById('modal_' + i)?.classList.toggle('hidden');
-		document.getElementById('modal_' + e)?.classList.toggle('hidden');
+		document.getElementById("modal_" + i)?.classList.toggle("hidden");
+		document.getElementById("modal_" + e)?.classList.toggle("hidden");
 	}
 
 	function prevImage(i) {
 		let e = i - 1;
 		if (i == 0) {
-			e = document.querySelectorAll('._modal').length - 1;
+			e = document.querySelectorAll("._modal").length - 1;
 		}
-		document.getElementById('modal_' + i)?.classList.toggle('hidden');
-		document.getElementById('modal_' + e)?.classList.toggle('hidden');
+		document.getElementById("modal_" + i)?.classList.toggle("hidden");
+		document.getElementById("modal_" + e)?.classList.toggle("hidden");
 	}
 </script>

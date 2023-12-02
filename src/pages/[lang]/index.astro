@@ -1,20 +1,23 @@
 ---
-import Default from '~/layouts/Default.astro';
-import Section from '~/components/Section.astro';
-import { Languages } from '../../utils/types';
-import main_logo from '../../assets/img/main_logo.svg';
-import Navbar from '~/components/Navbar.astro';
-import Footer from '~/components/Footer.astro';
-import Carousel from '~/components/Carousel.astro';
-const chi_siamo = await Astro.glob('../../../data/content/chi_siamo.*');
-const missione = await Astro.glob('../../../data/content/missione.*');
-const diventa_volontario = await Astro.glob('../../../data/content/diventa_volontario.*');
-const proposte = await Astro.glob('../../../data/content/proposte.*');
-const affitto = await Astro.glob('../../../data/content/affitto.*');
-const sostienici = await Astro.glob('../../../data/content/sostienici.*');
+import Default from "~/layouts/Default.astro";
+import Section from "~/components/Section.astro";
+import { Languages } from "../../utils/types";
+import main_logo from "../../assets/img/main_logo.svg";
+import Navbar from "~/components/Navbar.astro";
+import Footer from "~/components/Footer.astro";
+import Carousel from "~/components/Carousel.astro";
+import Header from "~/components/Header.astro";
+const chi_siamo = await Astro.glob("../../../data/content/chi_siamo.*");
+const missione = await Astro.glob("../../../data/content/missione.*");
+const diventa_volontario = await Astro.glob(
+	"../../../data/content/diventa_volontario.*",
+);
+const proposte = await Astro.glob("../../../data/content/proposte.*");
+const affitto = await Astro.glob("../../../data/content/affitto.*");
+const sostienici = await Astro.glob("../../../data/content/sostienici.*");
 // const calendar = await Astro.glob('../../../data/calendar/*.md');
 
-const images = await Astro.glob('../../assets/opt_img/carousel/*.top.jpg');
+const images = await Astro.glob("../../assets/opt_img/carousel/*.top.jpg");
 
 export async function getStaticPaths() {
 	return Languages.values().map((language: any) => {
@@ -30,122 +33,168 @@ const { language } = Astro.props;
 <Default title="homepage">
 	<header class="relative">
 		<Navbar current={0} language={language} />
-		<div
-			class="background_gradient md:pt-0 md:h-100 h-[70%] flex flex-col w-full items-center justify-center text-white pt-25"
-		>
-			<img src={main_logo} alt="" width="100px" height="100px" class="mb-20px" />
-			<h1 class="mb-50px text-5xl mx-auto text-center">
-				{
-					language == 'it' ? (
-						<>
-							Centro <b>Con-Dividi</b>
-						</>
-					) : (
-						<>
-							<b>Con-Dividi</b> Center
-						</>
-					)
-				}
-			</h1>
-			<h2 class="text-white px-5 pb-5 md:p-0 text-center">
-				{
-					language == 'it' ? (
-						<>
-							Incontri, mostre, laboratori e dibattiti per diffondere e sensibilizzare tutti, sui temi dell'infanzia,
-							dell'adolescenza e della famiglia.
-						</>
-					) : (
-						<>
-							Meetings, exhibitions, workshops, and debates to spread awareness and educate everyone on the topics of
-							childhood, adolescence, and family.
-						</>
-					)
-				}
-			</h2>
-		</div>
+		<Header language={language} />
 	</header>
 
-	<main class="relative flex flex-col py-50px">
-		<Section title={chi_siamo.filter((e: any) => e.frontmatter.lang === language)[0].frontmatter.title}>
-			{chi_siamo.map((item: any) => (item.frontmatter.lang === language ? <item.Content /> : ''))}
+	<main class="relative flex flex-col py-50px" transition:animate="slide">
+		<Section
+			title={chi_siamo.filter((e: any) => e.frontmatter.lang === language)[0]
+				.frontmatter.title}
+		>
+			{
+				chi_siamo.map((item: any) =>
+					item.frontmatter.lang === language ? <item.Content /> : "",
+				)
+			}
 		</Section>
-		<Section title={missione.filter((e: any) => e.frontmatter.lang === language)[0].frontmatter.title}>
-			{missione.map((item: any) => (item.frontmatter.lang === language ? <item.Content /> : ''))}
+		<Section
+			title={missione.filter((e: any) => e.frontmatter.lang === language)[0]
+				.frontmatter.title}
+		>
+			{
+				missione.map((item: any) =>
+					item.frontmatter.lang === language ? <item.Content /> : "",
+				)
+			}
 		</Section>
-		<Section title={diventa_volontario.filter((e: any) => e.frontmatter.lang === language)[0].frontmatter.title}>
+		<Section
+			title={diventa_volontario.filter(
+				(e: any) => e.frontmatter.lang === language,
+			)[0].frontmatter.title}
+		>
 			{
 				diventa_volontario.map((item: any) =>
+					item.frontmatter.lang === language ? (
+						<>
+							<item.Content />
+						</>
+					) : (
+						""
+					),
+				)
+			}
+		</Section>
+		<Section
+			title={proposte.filter((e: any) => e.frontmatter.lang === language)[0]
+				.frontmatter.title}
+		>
+			{
+				proposte.map((item: any) =>
+					item.frontmatter.lang === language ? (
+						<div class="flex">
+							<div class="prose mt-4 m-auto">
+								<h3>
+									{language === "it"
+										? "Giornate apertura al pubblico:"
+										: "Public opening days"}
+								</h3>
+
+								<ul class="list-none m-0">
+									{item.frontmatter.activities.map(
+										(activity: {
+											day: string;
+											hours: string;
+											description: string;
+										}) => (
+											<li class="!before:content-[none] pr-4 border-y border-fucsia bg-gray-50">
+												<h4 class="font-bold">{activity.day}</h4>
+												<p class="text-gray-600">
+													{activity.hours != "" ? (
+														<> {activity.hours} - </>
+													) : (
+														""
+													)}{" "}
+													{activity.description}
+												</p>
+											</li>
+										),
+									)}
+								</ul>
+
+								<p class="mt-4 text-red-600 font-bold">
+									{item.frontmatter.note}
+								</p>
+							</div>
+						</div>
+					) : (
+						""
+					),
+				)
+			}
+		</Section>
+		<Section
+			title={affitto.filter((e: any) => e.frontmatter.lang === language)[0]
+				.frontmatter.title}
+		>
+			{
+				affitto.map((item: any) =>
 					item.frontmatter.lang === language ? (
 						<>
 							<item.Content />
 							<Carousel images={images} />
 						</>
 					) : (
-						''
-					)
+						""
+					),
 				)
 			}
 		</Section>
-		<Section title={proposte.filter((e: any) => e.frontmatter.lang === language)[0].frontmatter.title}>
+		<Section
+			title={sostienici.filter((e: any) => e.frontmatter.lang === language)[0]
+				.frontmatter.title}
+		>
 			{
-				proposte.map((item: any) =>
-					item.frontmatter.lang === language ? (
-						<div class="flex">
-							<div class="prose mt-4 m-auto">
-								<h3>{language === 'it' ? 'Giornate apertura al pubblico:' : 'Public opening days'}</h3>
-
-								<ul class="list-none m-0">
-									{item.frontmatter.activities.map((activity: { day: string; hours: string; description: string }) => (
-										<li class="!before:content-[none] pr-4 border-y border-fucsia bg-gray-50">
-											<h4 class="font-bold">{activity.day}</h4>
-											<p class="text-gray-600">
-												{activity.hours != '' ? <> {activity.hours} - </> : ''} {activity.description}
-											</p>
-										</li>
-									))}
-								</ul>
-
-								<p class="mt-4 text-red-600 font-bold">{item.frontmatter.note}</p>
-							</div>
-						</div>
-					) : (
-						''
-					)
+				sostienici.map((item: any) =>
+					item.frontmatter.lang === language ? <item.Content /> : "",
 				)
 			}
-		</Section>
-		<Section title={affitto.filter((e: any) => e.frontmatter.lang === language)[0].frontmatter.title}>
-			{affitto.map((item: any) => (item.frontmatter.lang === language ? <item.Content /> : ''))}
-		</Section>
-		<Section title={sostienici.filter((e: any) => e.frontmatter.lang === language)[0].frontmatter.title}>
-			{sostienici.map((item: any) => (item.frontmatter.lang === language ? <item.Content /> : ''))}
 		</Section>
 		<Section title="Contattaci">
 			<div>
 				<div>
-					<div class="bg-gray-50 py-6 rounded-lg border border-1 border-fucsia text-center">
+					<div
+						class="bg-gray-50 py-6 rounded-lg border border-1 border-fucsia text-center"
+					>
 						<div class="mb-4">
-							<span class="font-semibold">{language === 'it' ? 'Telefono' : 'Phone'}:</span>
-							<a href="tel:0762976640" class="text-fucsia hover:underline">0762976640</a>
+							<span class="font-semibold"
+								>{language === "it" ? "Telefono" : "Phone"}:</span
+							>
+							<a href="tel:0762976640" class="text-fucsia hover:underline"
+								>0762976640</a
+							>
 						</div>
 
 						<div class="mb-4">
-							<span class="font-semibold">{language === 'it' ? 'Email' : 'Email'}:</span>
-							<a href="mailto:condividi2020@gmail.com" class="text-fucsia hover:underline">condividi2020@gmail.com</a>
+							<span class="font-semibold"
+								>{language === "it" ? "Email" : "Email"}:</span
+							>
+							<a
+								href="mailto:condividi2020@gmail.com"
+								class="text-fucsia hover:underline">condividi2020@gmail.com</a
+							>
 						</div>
 
 						<div class="mb-4">
-							<span class="font-semibold">{language === 'it' ? 'Indirizzo' : 'Address'}:</span>
+							<span class="font-semibold"
+								>{language === "it" ? "Indirizzo" : "Address"}:</span
+							>
 							<p>via Carvina 1, 6807 Taverne, stabile 1 al primo piano</p>
 						</div>
 
 						<div>
-							<span class="font-semibold">{language === 'it' ? 'Mappa' : 'Map'}:</span>
+							<span class="font-semibold"
+								>{language === "it" ? "Mappa" : "Map"}:</span
+							>
 							<a
 								href="https://goo.gl/maps/3HtXUMiUb3n2Vthr8"
 								class="text-fucsia hover:underline"
 								target="_blank"
-								rel="noopener noreferrer">{language === 'it' ? 'Clicca qui per la mappa' : 'Click here for the map'}</a
+								rel="noopener noreferrer"
+								>{
+									language === "it"
+										? "Clicca qui per la mappa"
+										: "Click here for the map"
+								}</a
 							>
 						</div>
 					</div>
@@ -219,5 +268,3 @@ const { language } = Astro.props;
 	</main>
 	<Footer language={language} />
 </Default>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>

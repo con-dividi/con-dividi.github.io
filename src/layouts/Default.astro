@@ -1,8 +1,9 @@
 ---
-import 'virtual:windi.css';
-import '../assets/style.css';
-const redirect = Astro.url.href.slice(-1) != '/';
-const slash_url = Astro.url.href + '/';
+import "virtual:windi.css";
+import "../assets/style.css";
+import { ViewTransitions } from "astro:transitions";
+const redirect = Astro.url.href.slice(-1) != "/";
+const slash_url = Astro.url.href + "/";
 
 export interface Props {
 	title: string;
@@ -10,9 +11,10 @@ export interface Props {
 const { title } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html class="h-full w-full">
 	<head>
+		<ViewTransitions />
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -22,7 +24,10 @@ const { title } = Astro.props;
 		<meta name="theme-color" content="#ffffff" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="/font-awesome-4.7.0/css/font-awesome.min.css" />
+		<link
+			rel="stylesheet"
+			href="/font-awesome-4.7.0/css/font-awesome.min.css"
+		/>
 		{redirect && <meta http-equiv="refresh" content={`0; url=${slash_url}`} />}
 		<title>Con-Dividi - {title}</title>
 		<meta charset="UTF-8" />
@@ -33,10 +38,10 @@ const { title } = Astro.props;
 		<meta
 			name="twitter:image:src"
 			content="https://raw.githubusercontent.com/con-dividi/con-dividi.github.io/main/src/assets/img/main_logo.svg"
-		/><meta name="twitter:site" content="@condividi" /><meta name="twitter:card" content="summary_large_image" /><meta
-			name="twitter:title"
-			content="Con-Dividi/condividi.org"
-		/><meta
+		/><meta name="twitter:site" content="@condividi" /><meta
+			name="twitter:card"
+			content="summary_large_image"
+		/><meta name="twitter:title" content="Con-Dividi/condividi.org" /><meta
 			name="twitter:description"
 			content="Incontri, mostre, laboratori e dibattiti per diffondere e sensibilizzare tutti, sui temi dell'infanzia, dell'adolescenza e della famiglia."
 		/>
@@ -46,19 +51,28 @@ const { title } = Astro.props;
 		/><meta
 			property="og:image:alt"
 			content="Incontri, mostre, laboratori e dibattiti per diffondere e sensibilizzare tutti, sui temi dell'infanzia, dell'adolescenza e della famiglia."
-		/><meta property="og:image:width" content="200" /><meta property="og:image:height" content="200" /><meta
-			property="og:site_name"
-			content="Con-Dividi"
-		/><meta property="og:type" content="website" /><meta property="og:title" content="Con-Dividi" /><meta
+		/><meta property="og:image:width" content="200" /><meta
+			property="og:image:height"
+			content="200"
+		/><meta property="og:site_name" content="Con-Dividi" /><meta
+			property="og:type"
+			content="website"
+		/><meta property="og:title" content="Con-Dividi" /><meta
 			property="og:url"
 			content="https://condividi.org/"
 		/><meta
 			property="og:description"
 			content="Incontri, mostre, laboratori e dibattiti per diffondere e sensibilizzare tutti, sui temi dell'infanzia, dell'adolescenza e della famiglia."
 		/>
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+		<link
+			href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
 		<slot />
+		<script>
+			import "flowbite";
+		</script>
 	</body>
 </html>
