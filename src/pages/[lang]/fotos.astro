@@ -1,7 +1,6 @@
 ---
 import Default from "~/layouts/Default.astro";
 import { Languages } from "../../utils/types";
-import main_logo from "../../assets/img/main_logo.svg";
 import Navbar from "~/components/Navbar.astro";
 import Footer from "~/components/Footer.astro";
 import Modal from "~/components/Modal.astro";
@@ -80,7 +79,7 @@ export async function getStaticPaths() {
 const { language } = Astro.props;
 ---
 
-<Default title="homepage">
+<Default title="homepage" language={language}>
 	<header class="relative">
 		<Navbar current={2} language={language} />
 		<Header language={language} />
@@ -107,29 +106,3 @@ const { language } = Astro.props;
 	</div>
 	<Footer language={language} />
 </Default>
-
-<script></script>
-<script is:inline>
-	function triggerDialog(i) {
-		document.getElementById("modal_" + i)?.classList.toggle("hidden");
-	}
-
-	function nextImage(i) {
-		let e = i + 1;
-		let next = document.getElementById("modal_" + e);
-		if (next == null) {
-			e = 0;
-		}
-		document.getElementById("modal_" + i)?.classList.toggle("hidden");
-		document.getElementById("modal_" + e)?.classList.toggle("hidden");
-	}
-
-	function prevImage(i) {
-		let e = i - 1;
-		if (i == 0) {
-			e = document.querySelectorAll("._modal").length - 1;
-		}
-		document.getElementById("modal_" + i)?.classList.toggle("hidden");
-		document.getElementById("modal_" + e)?.classList.toggle("hidden");
-	}
-</script>

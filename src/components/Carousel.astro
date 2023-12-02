@@ -142,7 +142,7 @@ const { images } = Astro.props;
 		});
 		carousel_indicators.forEach((el, i) => {
 			options.indicators?.items?.push({
-				position: 0,
+				position: i,
 				el: el as HTMLElement,
 			});
 		});
@@ -177,12 +177,12 @@ const { images } = Astro.props;
 	}
 </script>
 
-<script is:inline>
-	function triggerDialog(i) {
+<script>
+	function triggerDialog(i: string) {
 		document.getElementById("modal_" + i)?.classList.toggle("hidden");
 	}
 
-	function nextImage(i) {
+	function nextImage(i: any) {
 		let e = i + 1;
 		let next = document.getElementById("modal_" + e);
 		if (next == null) {
@@ -192,7 +192,7 @@ const { images } = Astro.props;
 		document.getElementById("modal_" + e)?.classList.toggle("hidden");
 	}
 
-	function prevImage(i) {
+	function prevImage(i: any) {
 		let e = i - 1;
 		if (i == 0) {
 			e = document.querySelectorAll("._modal").length - 1;

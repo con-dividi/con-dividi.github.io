@@ -115,7 +115,7 @@ export function eventParser(e: string[]): Event {
 const { language } = Astro.props;
 ---
 
-<Default title="homepage">
+<Default title="homepage" language={language}>
 	<header class="relative">
 		<Navbar current={1} language={language} />
 		<Header language={language} />
