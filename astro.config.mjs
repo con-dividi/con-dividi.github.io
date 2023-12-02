@@ -6,7 +6,7 @@ import mdx from "@astrojs/mdx";
 import WindiCSS from "vite-plugin-windicss";
 import { SITE } from "./src/config.mjs";
 import tailwind from "@astrojs/tailwind";
-import svelte from '@astrojs/svelte';
+import svelte from "@astrojs/svelte";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const DEFAULT_OPTIONS = {
