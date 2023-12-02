@@ -7,6 +7,7 @@ import Footer from "~/components/Footer.astro";
 import Modal from "~/components/Modal.astro";
 import ModalContent from "~/components/ModalContent.astro";
 import Header from "~/components/Header.astro";
+import ClientImages from "~/components/ClientImages.svelte";
 
 const imagesRaw = await Astro.glob("../../assets/opt_img/carousel/*.jpg");
 const files = [
@@ -90,11 +91,10 @@ const { language } = Astro.props;
 				images.map((e: any, i: any) => {
 					return (
 						<div class="grid">
-							<img
-								class="m-auto h-auto max-w-full rounded-lg"
-								src={e.default.src}
-								alt=""
+							<ClientImages
+								image_src={e.default.src}
 								onclick={"triggerDialog(" + i + ")"}
+								client:visible
 							/>
 							<Modal index={i}>
 								<ModalContent i={i} image={e} />
@@ -108,6 +108,7 @@ const { language } = Astro.props;
 	<Footer language={language} />
 </Default>
 
+<script></script>
 <script is:inline>
 	function triggerDialog(i) {
 		document.getElementById("modal_" + i)?.classList.toggle("hidden");
