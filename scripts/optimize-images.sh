@@ -23,10 +23,10 @@ processImage() {
     # Determine the output format based on the file extension
     case "$targetPath" in
         *.jpg|*.jpeg)
-            ffmpeg -i "$sourcePath" -compression_level 5 -q:v 10 "$targetPath"
+            ffmpeg -i "$sourcePath" -compression_level 8 -q:v 20 "$targetPath"
             ;;
         *.png)
-            ffmpeg -i "$sourcePath" -compression_level 5 "$targetPath"
+            ffmpeg -i "$sourcePath" -compression_level 8 "$targetPath"
             ;;
     esac
 }

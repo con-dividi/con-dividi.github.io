@@ -74,7 +74,69 @@ const { title, language } = Astro.props;
 	<body>
 		<slot />
 		<script>
-			import "flowbite";
+			class ClickableImage extends HTMLElement {
+				constructor() {
+					super();
+
+					// Read the message from the data attribute.
+					const id = this.dataset.message ?? 0;
+					const img = this.querySelector("img");
+					const next_items_buttons = this.querySelectorAll(
+						"button.nextimagebutton",
+					);
+					const prev_items_buttons = this.querySelectorAll(
+						"button.previmagebutton",
+					);
+					const close_buttons = this.querySelectorAll("button.closebutton");
+					img?.addEventListener("click", () => {
+						triggerDialog(id.toString());
+					});
+					next_items_buttons.forEach((el) => {
+						el.addEventListener("click", () => {
+							nextImage(Number(id));
+						});
+					});
+					prev_items_buttons.forEach((el) => {
+						el.addEventListener("click", () => {
+							prevImage(Number(id));
+						});
+					});
+					close_buttons.forEach((el) => {
+						el.addEventListener("click", () => {
+							triggerDialog(id.toString());
+						});
+					});
+				}
+			}
+
+			function triggerDialog(i: string) {
+				document.getElementById("modal_" + i)?.classList.toggle("hidden");
+			}
+
+			customElements.define("div-with-id", ClickableImage);
+
+			function nextImage(i: number) {
+				console.log("nextImage" + i);
+				let searchText = "modal_" + (i + 1);
+				console.log(searchText);
+				let next = document.getElementById(searchText);
+				console.log(next);
+				if (next == null) {
+					next = document.getElementById("modal_" + 0);
+				}
+				document.getElementById("modal_" + i)?.classList.toggle("hidden");
+				next?.classList.toggle("hidden");
+			}
+
+			function prevImage(i: number) {
+				console.log("prevImage" + i);
+				let e = i - 1;
+				if (i == 0) {
+					e = document.querySelectorAll("._modal").length - 1;
+				}
+				document.getElementById("modal_" + i)?.classList.toggle("hidden");
+				document.getElementById("modal_" + e)?.classList.toggle("hidden");
+			}
 		</script>
 	</body>
 </html>

@@ -1,11 +1,5 @@
 <script>
-  export let image_src;
-  export let onclick;
+	export let image_src;
 </script>
 
-<img
-  class="m-auto h-auto max-w-full rounded-lg"
-  src={image_src}
-  alt=""
-  on:click={onclick}
-/>
+<img class="m-auto h-auto max-w-full rounded-lg" src={image_src} alt="" />

@@ -22,12 +22,13 @@ const { images } = Astro.props;
 								id={"carousel-item-" + i}
 								class="hidden duration-700 ease-in-out"
 							>
-								<img
-									src={e.default.src}
-									class="absolute left-1/2 top-1/2 block w-full -translate-x-1/2 -translate-y-1/2"
-									alt="..."
-									onclick={"triggerDialog( " + i + ")"}
-								/>
+								<div-with-id data-message={i}>
+									<img
+										src={e.default.src}
+										class="absolute left-1/2 top-1/2 block w-full -translate-x-1/2 -translate-y-1/2"
+										alt="..."
+									/>
+								</div-with-id>
 							</div>
 							<Modal index={i}>
 								<ModalContent i={i} image={e} />
@@ -161,6 +162,9 @@ const { images } = Astro.props;
 		);
 
 		carousel.cycle();
+		document.addEventListener("astro:page-load", () => {
+			carousel.cycle();
+		});
 
 		// set event listeners for prev and next buttons
 		const $prevButton = document.getElementById("data-carousel-prev");
@@ -174,30 +178,5 @@ const { images } = Astro.props;
 				carousel.next();
 			});
 		}
-	}
-</script>
-
-<script>
-	function triggerDialog(i: string) {
-		document.getElementById("modal_" + i)?.classList.toggle("hidden");
-	}
-
-	function nextImage(i: any) {
-		let e = i + 1;
-		let next = document.getElementById("modal_" + e);
-		if (next == null) {
-			e = 0;
-		}
-		document.getElementById("modal_" + i)?.classList.toggle("hidden");
-		document.getElementById("modal_" + e)?.classList.toggle("hidden");
-	}
-
-	function prevImage(i: any) {
-		let e = i - 1;
-		if (i == 0) {
-			e = document.querySelectorAll("._modal").length - 1;
-		}
-		document.getElementById("modal_" + i)?.classList.toggle("hidden");
-		document.getElementById("modal_" + e)?.classList.toggle("hidden");
 	}
 </script>

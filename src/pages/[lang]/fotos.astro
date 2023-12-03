@@ -90,11 +90,9 @@ const { language } = Astro.props;
 				images.map((e: any, i: any) => {
 					return (
 						<div class="grid">
-							<ClientImages
-								image_src={e.default.src}
-								onclick={"triggerDialog(" + i + ")"}
-								client:visible
-							/>
+							<div-with-id data-message={i}>
+								<ClientImages image_src={e.default.src} client:visible />
+							</div-with-id>
 							<Modal index={i}>
 								<ModalContent i={i} image={e} />
 							</Modal>

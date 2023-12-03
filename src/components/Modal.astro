@@ -13,11 +13,11 @@ const { index } = Astro.props;
 	<div
 		class="h-full min-w-full min-h-full relative w-full max-w-7xl max-h-full bg-gray-100 rounded"
 	>
-		<button
-			onclick={"triggerDialog(" + index + ")"}
-			class="absolute z-10 right-5 top-5"
-			><i class="fa fa-times" aria-hidden="true"></i>
-		</button>
+		<div-with-id data-message={index}>
+			<button class="absolute z-10 right-5 top-5 closebutton"
+				><i class="fa fa-times" aria-hidden="true"></i>
+			</button>
+		</div-with-id>
 		<div
 			class="h-full overflow-hidden relative bg-white rounded-lg shadow dark:bg-gray-700 rounded"
 		>

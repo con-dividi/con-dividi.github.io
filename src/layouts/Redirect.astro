@@ -1,6 +1,7 @@
 ---
 import ButtonMain from "~/components/ButtonMain.astro";
 import Default from "./Default.astro";
+import { Languages } from "~/utils/types";
 
 export interface Props {
 	title: string;
@@ -10,7 +11,7 @@ export interface Props {
 const { title, url, redirect_page = true } = Astro.props;
 ---
 
-<Default title={title}>
+<Default title={title} language={Languages.EN}>
 	<header class="relative">
 		<nav
 			class="background_gradient h-screen flex flex-col w-full items-center justify-center"
