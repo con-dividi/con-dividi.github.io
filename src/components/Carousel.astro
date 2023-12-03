@@ -121,66 +121,69 @@ const { images } = Astro.props;
 	} from "flowbite";
 	import type { InstanceOptions } from "flowbite";
 
-	const carouselElement = document.getElementById("carousel-1");
-	if (carouselElement != null) {
-		const carousel_items = document.querySelectorAll('[id^="carousel-item-"]');
-		const carousel_indicators = document.querySelectorAll(
-			'[id^="carousel-indicators-"]',
-		);
-		const items: CarouselItem[] = [];
-		const options: CarouselOptions = {
-			defaultPosition: 1,
-			interval: 3000,
+	document.addEventListener("astro:page-load", () => {
+		const carouselElement = document.getElementById("carousel-1");
+		if (carouselElement != null) {
+			const carousel_items = document.querySelectorAll(
+				'[id^="carousel-item-"]',
+			);
+			const carousel_indicators = document.querySelectorAll(
+				'[id^="carousel-indicators-"]',
+			);
+			const items: CarouselItem[] = [];
+			const options: CarouselOptions = {
+				defaultPosition: 1,
+				interval: 3000,
 
-			indicators: {
-				activeClasses: "bg-white dark:bg-gray-800",
-				inactiveClasses:
-					"bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800",
-				items: [],
-			},
-		};
-		carousel_items.forEach((el, i) => {
-			items.push({
-				position: i,
-				el: el as HTMLElement,
+				indicators: {
+					activeClasses: "bg-white dark:bg-gray-800",
+					inactiveClasses:
+						"bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800",
+					items: [],
+				},
+			};
+			carousel_items.forEach((el, i) => {
+				items.push({
+					position: i,
+					el: el as HTMLElement,
+				});
 			});
-		});
-		carousel_indicators.forEach((el, i) => {
-			options.indicators?.items?.push({
-				position: i,
-				el: el as HTMLElement,
+			carousel_indicators.forEach((el, i) => {
+				options.indicators?.items?.push({
+					position: i,
+					el: el as HTMLElement,
+				});
 			});
-		});
 
-		// instance options object
-		const instanceOptions: InstanceOptions = {
-			id: "carousel-1",
-			override: true,
-		};
+			// instance options object
+			const instanceOptions: InstanceOptions = {
+				id: "carousel-1",
+				override: true,
+			};
 
-		const carousel: CarouselInterface = new Carousel(
-			carouselElement,
-			items,
-			options,
-			instanceOptions,
-		);
+			const carousel: CarouselInterface = new Carousel(
+				carouselElement,
+				items,
+				options,
+				instanceOptions,
+			);
 
-		carousel.cycle();
-		document.addEventListener("astro:page-load", () => {
 			carousel.cycle();
-		});
 
-		// set event listeners for prev and next buttons
-		const $prevButton = document.getElementById("data-carousel-prev");
-		const $nextButton = document.getElementById("data-carousel-next");
-		if ($prevButton != null && $nextButton != null) {
-			$prevButton.addEventListener("click", () => {
-				carousel.prev();
-			});
+			// set event listeners for prev and next buttons
+			const $prevButton = document.getElementById("data-carousel-prev");
+			const $nextButton = document.getElementById("data-carousel-next");
+			if ($prevButton != null && $nextButton != null) {
+				$prevButton.addEventListener("click", () => {
+					carousel.prev();
+				});
 
-			$nextButton.addEventListener("click", () => {
-				carousel.next();
-			});
+				$nextButton.addEventListener("click", () => {
+					carousel.next();
+				});
+			}
+
+			carousel.cycle();
 		}
-	}
+	});
 </script>
