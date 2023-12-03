@@ -8,7 +8,11 @@ export interface Props {
 const { images } = Astro.props;
 ---
 
-<div id="custom-controls-gallerys" class="relative w-full py-50px">
+<div
+	id="custom-controls-gallerys"
+	class="relative w-full py-50px"
+	transition:animate="none"
+>
 	<div id="carousel-1" class="relative w-full">
 		<!-- Carousel wrapper -->
 		<div
