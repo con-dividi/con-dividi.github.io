@@ -20,7 +20,7 @@
     "@astrojs/mdx": "^1.1.5",
     "@astrojs/rss": "^3.0.0",
     "@astrojs/sitemap": "^3.0.3",
-    "@astrolib/analytics": "^0.4.2",
+    "@astrolib/analytics": "^0.5.0",
     "@astrolib/seo": "^0.6.0",
     "@fontsource/inter": "^5.0.15",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
