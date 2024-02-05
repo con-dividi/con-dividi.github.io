@@ -28,7 +28,7 @@
     "astro-icon": "^0.8.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^8.55.0",
-    "eslint-plugin-astro": "^0.30.0",
+    "eslint-plugin-astro": "^0.31.4",
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-prettier": "^5.0.1",
     "limax": "^4.1.0",
