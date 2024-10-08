@@ -5,23 +5,28 @@ export interface Props {
 	description: string;
 	date: Date;
 	link: string;
+	link2: string | undefined;
 	language: string;
 	history: boolean;
 	id: string;
 }
 
-const { name, description, date, link, language, history, id } = Astro.props;
+const { name, description, date, link, link2, language, history, id } =
+	Astro.props;
 
 let time_text = "";
 let posterText = "";
+let posterText2 = "";
 switch (language) {
 	case "it":
 		time_text = "Alle ";
 		posterText = "Guarda la locandina ";
+		posterText2 = "Guarda la seconda locandina ";
 		break;
 	case "en":
 		time_text = "At time ";
 		posterText = "See the poster ";
+		posterText2 = "See the second poster ";
 		break;
 	default:
 		break;
@@ -60,7 +65,7 @@ const localLanguage = language == Languages.IT ? "it-IT" : "default";
 				class="text-gray-700 font-medium text-sm text-center lg:text-left px-2"
 			>
 				{
-					history ? (
+					!history ? (
 						<div class="text-red-500">
 							{language == Languages.IT ? "Evento Passato" : "Expired Event"}
 						</div>
@@ -94,6 +99,18 @@ const localLanguage = language == Languages.IT ? "it-IT" : "default";
 					<a href={link} target="_blank">
 						{posterText}
 					</a>
+				)
+			}
+			{
+				link2 != undefined ? (
+					<>
+						<span>-</span>
+						<a href={link2} target="_blank">
+							{posterText2}
+						</a>
+					</>
+				) : (
+					""
 				)
 			}
 		</div>

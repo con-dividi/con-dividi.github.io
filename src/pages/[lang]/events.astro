@@ -1,5 +1,6 @@
 ---
 import fs from "fs";
+
 import Default from "~/layouts/Default.astro";
 import { Languages } from "../../utils/types";
 import Navbar from "~/components/Navbar.astro";
@@ -21,51 +22,37 @@ interface Event {
 	description: string;
 	date: Date;
 	poster: string;
+	poster2: string | undefined;
 }
+const allCalendarsParsed: string[][][] = calendarsRaw.map((e: string) => {
+	// Split the CSV string into lines
+	const lines: string[] = e.split("\n");
 
-const allCalendarsParsed: string[][][] = calendarsRaw.map((e: string) =>
-	CSVParser(e),
+	// Remove the header line and filter out any empty lines
+	const dataLines: string[] = lines
+		.slice(1)
+		.filter((line: string) => line.trim() !== "");
+
+	// Parse each line into an array of values
+	return dataLines.map((line: string): string[] => {
+		// Split the line by comma, handling quoted values
+		return (
+			line
+				.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g)
+				?.map((value: string) => value.replace(/^"|"$/g, "").trim()) ?? []
+		);
+	});
+});
+
+// Assuming Event is a defined type or interface
+const calendars: Event[][] = allCalendarsParsed.map((e: string[][]) =>
+	calendarParser(e),
 );
-const calendars: Event[][] = allCalendarsParsed.map((e) => calendarParser(e));
 
 let allEvents: Event[] = [];
 calendars.forEach((e) => {
 	allEvents = allEvents.concat(e);
 });
-
-export function CSVParser(csv: string): string[][] {
-	let rows = csv.split("\n");
-	rows.shift();
-	rows.pop();
-	let toReturn: string[][] = rows.map((e) => {
-		let insideText = false;
-
-		let startIndex = 0;
-		const toReturn: string[] = [];
-		for (let i = 0; i < e.length; i++) {
-			const element = e[i];
-			if (
-				element === '"' &&
-				(e[i - 1] === "," || (i === e.length - 1 ? true : e[i + 1] === ","))
-			) {
-				insideText = !insideText;
-			}
-			if (element === "," && !insideText) {
-				if (e[startIndex] === '"' && e[i - 1] === '"')
-					toReturn.push(e.substring(startIndex + 1, i - 1));
-				else toReturn.push(e.substring(startIndex, i));
-				startIndex = i + 1;
-			}
-			if (i === e.length - 1) {
-				if (e[startIndex] === '"' && e[i - 1] === '"')
-					toReturn.push(e.substring(startIndex + 1));
-				else toReturn.push(e.substring(startIndex));
-			}
-		}
-		return toReturn;
-	});
-	return toReturn;
-}
 
 export async function getStaticPaths() {
 	return Languages.values().map((language: any) => {
@@ -94,7 +81,14 @@ export function eventParser(e: string[]): Event {
 	let name = e[0];
 	let description = e[1];
 	let poster = e[4];
-	return { name: name, description: description, date: date, poster: poster };
+	let poster2 = e[5];
+	return {
+		name: name,
+		description: description,
+		date: date,
+		poster: poster,
+		poster2: poster2,
+	};
 }
 
 const { language } = Astro.props;
@@ -121,6 +115,7 @@ const { language } = Astro.props;
 								description={e.description}
 								date={e.date}
 								link={e.poster}
+								link2={e.poster2}
 								language={language}
 								id={"calendar_event_future-" + index}
 								history={true}
@@ -137,6 +132,7 @@ const { language } = Astro.props;
 								description={e.description}
 								date={e.date}
 								link={e.poster}
+								link2={e.poster2}
 								language={language}
 								id={"calendar_event_past-" + index}
 								history={false}
