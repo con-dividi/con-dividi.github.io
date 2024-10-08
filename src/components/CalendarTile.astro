@@ -7,9 +7,10 @@ export interface Props {
 	link: string;
 	language: string;
 	history: boolean;
+	id: string;
 }
 
-const { name, description, date, link, language, history } = Astro.props;
+const { name, description, date, link, language, history, id } = Astro.props;
 
 let time_text = "";
 let posterText = "";
@@ -29,7 +30,7 @@ switch (language) {
 let calendarColor = "rounded-lg lg:w-2/12 py-4 block h-auto shadow-inner flex";
 let posterColor = "font-medium text-sm pt-1 text-center lg:text-left px-2";
 let backgroundColor = "lg:flex rounded-lg border border-gray-400 my-5 lg:mx-20";
-if (!history) {
+if (history) {
 	calendarColor += " bg-fucsia";
 	posterColor += " text-yellow-500";
 } else {
@@ -40,7 +41,7 @@ if (!history) {
 const localLanguage = language == Languages.IT ? "it-IT" : "default";
 ---
 
-<div class={backgroundColor}>
+<div class={backgroundColor} id={id}>
 	<div class={calendarColor}>
 		<div class="m-auto">
 			<div class="text-center tracking-wide">
@@ -98,3 +99,23 @@ const localLanguage = language == Languages.IT ? "it-IT" : "default";
 		</div>
 	</div>
 </div>
+
+<script define:vars={{ id, history, date }}>
+	let element = document.getElementById(id);
+	let currentDate = new Date();
+	let _date = new Date(date);
+	if (element == null) {
+		return;
+	}
+	if (history) {
+		if (currentDate > _date) {
+			element.style.display = "none";
+			console.log("hidden");
+		}
+	} else {
+		if (currentDate < _date) {
+			element.style.display = "none";
+			console.log("hidden2");
+		}
+	}
+</script>

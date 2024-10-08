@@ -29,24 +29,9 @@ const allCalendarsParsed: string[][][] = calendarsRaw.map((e: string) =>
 const calendars: Event[][] = allCalendarsParsed.map((e) => calendarParser(e));
 
 let allEvents: Event[] = [];
-integrityCheck(calendars);
 calendars.forEach((e) => {
 	allEvents = allEvents.concat(e);
 });
-
-export function integrityCheck(calendars: Event[][]) {
-	calendars.forEach((calendar) => {
-		let defaultDate = calendar[0].date;
-		for (let i = 0; i < calendar.length; i++) {
-			if (
-				defaultDate.getMonth() != calendar[i].date.getMonth() ||
-				defaultDate.getFullYear() != calendar[i].date.getFullYear()
-			) {
-				throw new Error("Bad CSV, calendars must have the same month and year");
-			}
-		}
-	});
-}
 
 export function CSVParser(csv: string): string[][] {
 	let rows = csv.split("\n");
@@ -129,49 +114,43 @@ const { language } = Astro.props;
 							? "Eventi questo mese"
 							: "Upcoming events"}
 					</h2>
-					{allEvents
-						.filter(
-							(e) =>
-								e.date.getTime() > new Date().setDate(new Date().getDate() - 1),
-						)
-						.map((e) => {
-							return (
-								<CalendarTile
-									name={e.name}
-									description={e.description}
-									date={e.date}
-									link={e.poster}
-									language={language}
-									history={false}
-								/>
-							);
-						})}
+					{allEvents.map((e, index) => {
+						return (
+							<CalendarTile
+								name={e.name}
+								description={e.description}
+								date={e.date}
+								link={e.poster}
+								language={language}
+								id={"calendar_event_future-" + index}
+								history={true}
+							/>
+						);
+					})}
 					<h2 class="lg:flex rounded-lg text-2xl my-5 lg:mx-20 pt-10">
 						{language == Languages.IT ? "Eventi Passati" : "Expired Events"}
 					</h2>
-					{allEvents
-						.filter(
-							(e) =>
-								e.date.getTime() <
-									new Date().setDate(new Date().getDate() - 1) &&
-								e.date.getTime() >
-									new Date().setMonth(new Date().getMonth() - 1),
-						)
-						.map((e) => {
-							return (
-								<CalendarTile
-									name={e.name}
-									description={e.description}
-									date={e.date}
-									link={e.poster}
-									language={language}
-									history={true}
-								/>
-							);
-						})}
+					{allEvents.map((e, index) => {
+						return (
+							<CalendarTile
+								name={e.name}
+								description={e.description}
+								date={e.date}
+								link={e.poster}
+								language={language}
+								id={"calendar_event_past-" + index}
+								history={false}
+							/>
+						);
+					})}
 				</>
 			)
 		}
 	</div>
 	<Footer language={language} />
 </Default>
+
+<script>
+	// export variable with current date
+	export const currentDate = new Date();
+</script>
